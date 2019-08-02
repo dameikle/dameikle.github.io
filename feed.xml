@@ -5,8 +5,8 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 02 Aug 2019 07:22:02 +0100</pubDate>
-    <lastBuildDate>Fri, 02 Aug 2019 07:22:02 +0100</lastBuildDate>
+    <pubDate>Fri, 02 Aug 2019 07:29:08 +0100</pubDate>
+    <lastBuildDate>Fri, 02 Aug 2019 07:29:08 +0100</lastBuildDate>
     <generator>Jekyll v3.8.4</generator>
     
       <item>
@@ -23,6 +23,8 @@
 &lt;p&gt;The Cisco Meraki Client VPN option provides a L2TP/IPsec based VPN using either its own internal user store, an LDAP Directory, Microsoft Active Directory, or a Radius server to authenticate users.&lt;/p&gt;
 
 &lt;p&gt;Cisco Meraki provide great instructions for Windows, Mac and mobile devices, but really old instructions for Linux. Therefore, I am posting this as much to remind me the next time I need to set it up as to help others.&lt;/p&gt;
+
+&lt;!--more--&gt;
 
 &lt;h1 id=&quot;install-l2tp-plugins-for-network-manager&quot;&gt;Install L2TP Plugins for Network Manager&lt;/h1&gt;
 
