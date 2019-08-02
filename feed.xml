@@ -5,9 +5,106 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 09 Apr 2019 17:12:32 +0100</pubDate>
-    <lastBuildDate>Tue, 09 Apr 2019 17:12:32 +0100</lastBuildDate>
+    <pubDate>Fri, 02 Aug 2019 07:22:02 +0100</pubDate>
+    <lastBuildDate>Fri, 02 Aug 2019 07:22:02 +0100</lastBuildDate>
     <generator>Jekyll v3.8.4</generator>
+    
+      <item>
+        <title>Cisco Meraki Client VPN on Ubuntu 19.04</title>
+        <description>&lt;figure class=&quot;aligncenter&quot;&gt;
+    &lt;img src=&quot;/assets/img/cisco-meraki.png&quot; /&gt;
+    &lt;figcaption&gt;Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;With my beloved, and worn, day to day laptop having to go in for repair, I had to setup a temporary laptop to work on for a few weeks.&lt;/p&gt;
+
+&lt;p&gt;At work we use Cisco Meraki devices in many places, including the edge of network for our various offices. Whilst their main use is to form a mesh network around our offices and server infrastructure, we also use them to enable a lightweight Client VPN solution.&lt;/p&gt;
+
+&lt;p&gt;The Cisco Meraki Client VPN option provides a L2TP/IPsec based VPN using either its own internal user store, an LDAP Directory, Microsoft Active Directory, or a Radius server to authenticate users.&lt;/p&gt;
+
+&lt;p&gt;Cisco Meraki provide great instructions for Windows, Mac and mobile devices, but really old instructions for Linux. Therefore, I am posting this as much to remind me the next time I need to set it up as to help others.&lt;/p&gt;
+
+&lt;h1 id=&quot;install-l2tp-plugins-for-network-manager&quot;&gt;Install L2TP Plugins for Network Manager&lt;/h1&gt;
+
+&lt;p&gt;By default, support for L2TP VPNs is not installed for Network Manager, so we need to install them:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install network-manager-l2tp
+sudo apt-get install network-manager-l2tp-gnome
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;disable-system-xl2tpd&quot;&gt;Disable System xl2tpd&lt;/h1&gt;
+
+&lt;p&gt;Network Manager spawns and manages its own instance of &lt;em&gt;xl2tpd&lt;/em&gt; so if there is a system instance still running it will not be able to use UDP port 1701, and will instead use an ephemeral port (i.e. random high port).&lt;/p&gt;
+
+&lt;p&gt;To stop this from happening, we need to stop the deamon and disabling it from starting again:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl stop xl2tpd
+sudo systemctl disable xl2tpd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;setup-your-vpn-connection&quot;&gt;Setup Your VPN Connection&lt;/h1&gt;
+
+&lt;p&gt;Now you are ready to add your VPN connection. Having taken the steps above, we’ve Gnome Network Manager settings panel now includes the option to add L2TP VPN connections:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/nm-manager-screenshot-1.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The main settings we need to customise to work with Cisco Meraki Client VPN are on the &lt;em&gt;Identity&lt;/em&gt; tab.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/nm-identity-tab.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We can give our VPN a name, set the VPN gateway, and add our user credentials (with optional NT Domain depending whether Active Directory is used as the authentication scheme).&lt;/p&gt;
+
+&lt;p&gt;We now need to set our &lt;em&gt;IPsec&lt;/em&gt; and &lt;em&gt;PPP&lt;/em&gt; settings.&lt;/p&gt;
+
+&lt;h3 id=&quot;ipsec-settings&quot;&gt;IPsec Settings&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/nm-l2tp-ipsec-settings.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;em&gt;IPsec Settings&lt;/em&gt; we need to tick the &lt;em&gt;Enable IPsec tunnel to L2TP host&lt;/em&gt; checkbox , expand the &lt;em&gt;Advanced&lt;/em&gt; settings, and then add three things:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Pre-shared Key - adding the key provided by your network administrator&lt;/li&gt;
+  &lt;li&gt;Phase1 Algorithm - use the following &lt;em&gt;3des-sha1-modp1024&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Phase2 Algorithm - use the following &lt;em&gt;3des-sha1&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Click &lt;em&gt;OK&lt;/em&gt; to set this on the connection.&lt;/p&gt;
+
+&lt;h3 id=&quot;ppp-settings&quot;&gt;PPP Settings&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/nm-l2tp-ppp-settings.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the &lt;em&gt;PPP Settings&lt;/em&gt; we need to make sure &lt;em&gt;PPP&lt;/em&gt; is the only Authentication mechanism selected.&lt;/p&gt;
+
+&lt;p&gt;The other defaults should be OK, however I’ve included a screenshot to confirm against above.&lt;/p&gt;
+
+&lt;p&gt;Click &lt;em&gt;OK&lt;/em&gt; to set this on the connection.&lt;/p&gt;
+
+&lt;h1 id=&quot;use-your-vpn-connection&quot;&gt;Use Your VPN Connection&lt;/h1&gt;
+
+&lt;p&gt;The VPN should now be available in the Gnome Settings panel:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/nm-vpn-settings.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;and in the main Gnome Menu for quick connect/disconnect&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/vpn-gnome-settings-menu.png&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Fri, 02 Aug 2019 06:00:00 +0100</pubDate>
+        <link>https://meikle.io/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html</link>
+        <guid isPermaLink="true">https://meikle.io/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html</guid>
+        
+        <category>technology</category>
+        
+        <category>meraki</category>
+        
+        <category>vpn</category>
+        
+        
+        <category>technology</category>
+        
+      </item>
     
       <item>
         <title>Hello world</title>

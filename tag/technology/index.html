@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Posts Tagged - personal | David Meikle &mdash; Software | Open Source | Localisation </title>
-    <meta property="og:title" content="Posts Tagged - personal | David Meikle &mdash; Software | Open Source | Localisation " />
-    <meta name="twitter:title" content="Posts Tagged - personal | David Meikle &mdash; Software | Open Source | Localisation " />
+    <title>Posts Tagged - technology | David Meikle &mdash; Software | Open Source | Localisation </title>
+    <meta property="og:title" content="Posts Tagged - technology | David Meikle &mdash; Software | Open Source | Localisation " />
+    <meta name="twitter:title" content="Posts Tagged - technology | David Meikle &mdash; Software | Open Source | Localisation " />
 
     <meta name="description" content="I love to solve problems - often with software, always with tea.">
     <meta name="description" property="og:description" content="I love to solve problems - often with software, always with tea." />
@@ -17,7 +17,7 @@
     
     <meta name="twitter:site" content="@dameikle" />
     
-    <meta property="og:url" content="https://meikle.io/tag/personal/" />
+    <meta property="og:url" content="https://meikle.io/tag/technology/" />
 
     <meta property="og:image" content="" />
     <meta name="twitter:image" content="" />
@@ -96,7 +96,7 @@
     
     <link rel="stylesheet" href="https://meikle.io/assets/css/main.css">
 
-    <link rel="canonical" href="https://meikle.io/tag/personal/">
+    <link rel="canonical" href="https://meikle.io/tag/technology/">
 
     <link rel="alternate" type="application/rss+xml" title="" href="https://meikle.io/feed.xml">
 </head>
@@ -146,75 +146,153 @@
 </div>
 
 
-                <h1>Posts Tagged - personal</h1>
+                <h1>Posts Tagged - technology</h1>
 
-
-    
-        
-    
-        
-    
-        
-    
 
     
         
         <article class="post" role="article" itemscope itemtype="http://schema.org/BlogPosting">
             <header class="post-header">
                 <ul>
-                    <li><time datetime="2019-01-06T08:00:00+00:00" itemprop="datePublished">6 Jan, 2019</time></li>
+                    <li><time datetime="2019-08-02T06:00:00+01:00" itemprop="datePublished">2 Aug, 2019</time></li>
                     
                     <li class="cats">
                         
-                            <a href="/categories/personal/">personal</a>
+                            <a href="/categories/technology/">technology</a>
                         
                     </li>
                     
                 </ul>
-                <h2 itemprop="name headline"><a href="https://meikle.io/personal/helloworld.html">Hello world</a></h2>
+                <h2 itemprop="name headline"><a href="https://meikle.io/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html">Cisco Meraki Client VPN on Ubuntu 19.04</a></h2>
             </header>
 
             <div class="post-content">
                 <figure class="aligncenter">
-    <img src="/assets/img/journey.jpg" />
+    <img src="/assets/img/cisco-meraki.png" />
+    <figcaption>Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website</figcaption>
 </figure>
 
-<p>Hello world! Please bear with me, I am just getting setup.</p>
+<p>With my beloved, and worn, day to day laptop having to go in for repair, I had to setup a temporary laptop to work on for a few weeks.</p>
+
+<p>At work we use Cisco Meraki devices in many places, including the edge of network for our various offices. Whilst their main use is to form a mesh network around our offices and server infrastructure, we also use them to enable a lightweight Client VPN solution.</p>
+
+<p>The Cisco Meraki Client VPN option provides a L2TP/IPsec based VPN using either its own internal user store, an LDAP Directory, Microsoft Active Directory, or a Radius server to authenticate users.</p>
+
+<p>Cisco Meraki provide great instructions for Windows, Mac and mobile devices, but really old instructions for Linux. Therefore, I am posting this as much to remind me the next time I need to set it up as to help others.</p>
+
+<h1 id="install-l2tp-plugins-for-network-manager">Install L2TP Plugins for Network Manager</h1>
+
+<p>By default, support for L2TP VPNs is not installed for Network Manager, so we need to install them:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install network-manager-l2tp
+sudo apt-get install network-manager-l2tp-gnome
+
+</code></pre></div></div>
+
+<h1 id="disable-system-xl2tpd">Disable System xl2tpd</h1>
+
+<p>Network Manager spawns and manages its own instance of <em>xl2tpd</em> so if there is a system instance still running it will not be able to use UDP port 1701, and will instead use an ephemeral port (i.e. random high port).</p>
+
+<p>To stop this from happening, we need to stop the deamon and disabling it from starting again:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl stop xl2tpd
+sudo systemctl disable xl2tpd
+</code></pre></div></div>
+
+<h1 id="setup-your-vpn-connection">Setup Your VPN Connection</h1>
+
+<p>Now you are ready to add your VPN connection. Having taken the steps above, we’ve Gnome Network Manager settings panel now includes the option to add L2TP VPN connections:</p>
+
+<p><img src="/assets/img/nm-manager-screenshot-1.png" /></p>
+
+<p>The main settings we need to customise to work with Cisco Meraki Client VPN are on the <em>Identity</em> tab.</p>
+
+<p><img src="/assets/img/nm-identity-tab.png" /></p>
+
+<p>We can give our VPN a name, set the VPN gateway, and add our user credentials (with optional NT Domain depending whether Active Directory is used as the authentication scheme).</p>
+
+<p>We now need to set our <em>IPsec</em> and <em>PPP</em> settings.</p>
+
+<h3 id="ipsec-settings">IPsec Settings</h3>
+
+<p><img src="/assets/img/nm-l2tp-ipsec-settings.png" /></p>
+
+<p>In the <em>IPsec Settings</em> we need to tick the <em>Enable IPsec tunnel to L2TP host</em> checkbox , expand the <em>Advanced</em> settings, and then add three things:</p>
+
+<ul>
+  <li>Pre-shared Key - adding the key provided by your network administrator</li>
+  <li>Phase1 Algorithm - use the following <em>3des-sha1-modp1024</em></li>
+  <li>Phase2 Algorithm - use the following <em>3des-sha1</em></li>
+</ul>
+
+<p>Click <em>OK</em> to set this on the connection.</p>
+
+<h3 id="ppp-settings">PPP Settings</h3>
+
+<p><img src="/assets/img/nm-l2tp-ppp-settings.png" /></p>
+
+<p>In the <em>PPP Settings</em> we need to make sure <em>PPP</em> is the only Authentication mechanism selected.</p>
+
+<p>The other defaults should be OK, however I’ve included a screenshot to confirm against above.</p>
+
+<p>Click <em>OK</em> to set this on the connection.</p>
+
+<h1 id="use-your-vpn-connection">Use Your VPN Connection</h1>
+
+<p>The VPN should now be available in the Gnome Settings panel:</p>
+
+<p><img src="/assets/img/nm-vpn-settings.png" /></p>
+
+<p>and in the main Gnome Menu for quick connect/disconnect</p>
+
+<p><img src="/assets/img/vpn-gnome-settings-menu.png" /></p>
 
 
                 
-                    <p><a href="/personal/helloworld.html" role="button">Read More</a></p>
+                    <p><a href="/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html" role="button">Read More</a></p>
                 
             </div>
 
             <footer class="post-footer">
                 <div class="share">Share
                     <ul class="social-networks">
-                        <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Hello world&p[summary]=
+                        <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Cisco Meraki Client VPN on Ubuntu 19.04&p[summary]=
     
+    Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website
 
 
-Hello world! Please bear with me, I am just getting setup.
-&p[url]=https://meikle.io/personal/helloworld.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
-                        <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/personal/helloworld.html&text=
+With my beloved, and worn, day to day laptop having to go in f...&p[url]=https://meikle.io/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                        <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html&text=
     
+    Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website
 
 
-Hello world! Please bear with me, I am just getting setup.
-&hashtags=personal," rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+With my beloved, and worn, day to day laptop having to go in f...&hashtags=technology,meraki,vpn," rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
                     </ul>
                 </div>
                 
                 <div class="tags">
                     <ul>
                         
-                        <li><a href="https://meikle.io/tag/personal">personal</a></li>
+                        <li><a href="https://meikle.io/tag/technology">technology</a></li>
+                        
+                        <li><a href="https://meikle.io/tag/meraki">meraki</a></li>
+                        
+                        <li><a href="https://meikle.io/tag/vpn">vpn</a></li>
                         
                     </ul>
                 </div>
                 
             </footer>
         </article>
+        
+    
+        
+    
+        
+    
+
+    
         
     
 
