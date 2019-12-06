@@ -5,9 +5,70 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 21 Aug 2019 12:12:13 +0100</pubDate>
-    <lastBuildDate>Wed, 21 Aug 2019 12:12:13 +0100</lastBuildDate>
+    <pubDate>Fri, 06 Dec 2019 19:03:58 +0000</pubDate>
+    <lastBuildDate>Fri, 06 Dec 2019 19:03:58 +0000</lastBuildDate>
     <generator>Jekyll v3.8.4</generator>
+    
+      <item>
+        <title>HP Probook Touchpad Slow After Supend Ubuntu 19.04</title>
+        <description>&lt;figure class=&quot;aligncenter&quot;&gt;
+    &lt;img src=&quot;/assets/img/touchpad.jpg&quot; /&gt;
+    &lt;figcaption&gt;Photo of a Laptop Touchpad&lt;/figcaption&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Having got used to my replacement laptop, I’ve decided to keep using it, but there was one thing annoying me - the trackpad!&lt;/p&gt;
+
+&lt;p&gt;The trackpad is definately not the same quality as the MacBook Pro I was used to, but I could cope as the main features are there. However, I often move around a lot going from meeting to meeting, making use of the sleep/suspend capability.&lt;/p&gt;
+
+&lt;p&gt;That was when the trouble started…&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;sluggish-touch&quot;&gt;Sluggish Touch&lt;/h1&gt;
+
+&lt;p&gt;Upon waking from suspend, the touchpad was sluggish and jumping all over the place, rendering the machine unusable without a mouse!&lt;/p&gt;
+
+&lt;p&gt;The best way it seemed to get the touchpad to behave was to add post suspend script using &lt;em&gt;systemd&lt;/em&gt; to reload the driver. A little hacky but effective!&lt;/p&gt;
+
+&lt;h1 id=&quot;systemd-and-suspendhibernation-hooks&quot;&gt;Systemd and Suspend/Hibernation Hooks&lt;/h1&gt;
+
+&lt;p&gt;It is really easy to perform an action either before or after you suspend, with systemd providing a nice script based hook within its &lt;em&gt;systemd-suspend.service&lt;/em&gt; system service.&lt;/p&gt;
+
+&lt;p&gt;To use this, all you need to do is put an executable script under /usr/lib/systemd/system-sleep/ that checks whether the first argument is ‘pre’ for before the system suspends, or ‘post’ for after the system wakes. The script can have any name.&lt;/p&gt;
+
+&lt;p&gt;You can see more information in it’s man page:&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;man systemd-suspend.service&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;the-script&quot;&gt;The Script&lt;/h1&gt;
+
+&lt;p&gt;To sort this once and for all on the HP ProBook I wrote the following into a file called &lt;em&gt;/lib/systemd/system-sleep/touchpad-reload&lt;/em&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in
+  &lt;/span&gt;post&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    /sbin/rmmod i2c_hid &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; /sbin/modprobe i2c_hid
+  &lt;span class=&quot;p&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;esac&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And now the touchpad is as happy post-suspend as it is on a fresh restart. Happy days!&lt;/p&gt;
+</description>
+        <pubDate>Fri, 06 Dec 2019 06:00:00 +0000</pubDate>
+        <link>https://meikle.io/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html</link>
+        <guid isPermaLink="true">https://meikle.io/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html</guid>
+        
+        <category>technology</category>
+        
+        <category>hp-probook</category>
+        
+        <category>touchpad</category>
+        
+        
+        <category>technology</category>
+        
+      </item>
     
       <item>
         <title>Cisco Meraki Client VPN on Ubuntu 19.04</title>

@@ -5,19 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Category: technology | David Meikle &mdash; Software | Open Source | Localisation </title>
-    <meta property="og:title" content="Category: technology | David Meikle &mdash; Software | Open Source | Localisation " />
-    <meta name="twitter:title" content="Category: technology | David Meikle &mdash; Software | Open Source | Localisation " />
+    <title>HP Probook Touchpad Slow After Supend Ubuntu 19.04 | David Meikle &mdash; Software | Open Source | Localisation </title>
+    <meta property="og:title" content="HP Probook Touchpad Slow After Supend Ubuntu 19.04 | David Meikle &mdash; Software | Open Source | Localisation " />
+    <meta name="twitter:title" content="HP Probook Touchpad Slow After Supend Ubuntu 19.04 | David Meikle &mdash; Software | Open Source | Localisation " />
 
-    <meta name="description" content="Category: technology">
-    <meta name="description" property="og:description" content="Category: technology" />
-    <meta name="twitter:description" content="Category: technology" />
+    <meta name="description" content="I love to solve problems - often with software, always with tea.">
+    <meta name="description" property="og:description" content="I love to solve problems - often with software, always with tea." />
+    <meta name="twitter:description" content="I love to solve problems - often with software, always with tea." />
 
     <meta name="twitter:card" content="summary_large_image" />
     
     <meta name="twitter:site" content="@dameikle" />
     
-    <meta property="og:url" content="https://meikle.io/categories/technology/" />
+    <meta property="og:url" content="https://meikle.io/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html" />
 
     <meta property="og:image" content="" />
     <meta name="twitter:image" content="" />
@@ -96,7 +96,7 @@
     
     <link rel="stylesheet" href="https://meikle.io/assets/css/main.css">
 
-    <link rel="canonical" href="https://meikle.io/categories/technology/">
+    <link rel="canonical" href="https://meikle.io/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html">
 
     <link rel="alternate" type="application/rss+xml" title="" href="https://meikle.io/feed.xml">
 </head>
@@ -146,22 +146,21 @@
 </div>
 
 
-                <h1>Posts From Category: technology</h1>
-
-
-<article class="post" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
         <ul>
             <li><time datetime="2019-12-06T06:00:00+00:00" itemprop="datePublished">6 Dec, 2019</time></li>
             
+                
                 <li class="cats">
                     
                         <a href="/categories/technology/">technology</a>
                     
                 </li>
+                
             
         </ul>
-        <h2 itemprop="name headline"><a href="https://meikle.io/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html">HP Probook Touchpad Slow After Supend Ubuntu 19.04</a></h2>
+        <h2 itemprop="name headline">HP Probook Touchpad Slow After Supend Ubuntu 19.04</h2>
     </header>
 
     <div class="post-content">
@@ -176,11 +175,39 @@
 
 <p>That was when the trouble started…</p>
 
+<!--more-->
 
+<h1 id="sluggish-touch">Sluggish Touch</h1>
 
-        
-            <p><a href="/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html" role="button">Read More</a></p>
-        
+<p>Upon waking from suspend, the touchpad was sluggish and jumping all over the place, rendering the machine unusable without a mouse!</p>
+
+<p>The best way it seemed to get the touchpad to behave was to add post suspend script using <em>systemd</em> to reload the driver. A little hacky but effective!</p>
+
+<h1 id="systemd-and-suspendhibernation-hooks">Systemd and Suspend/Hibernation Hooks</h1>
+
+<p>It is really easy to perform an action either before or after you suspend, with systemd providing a nice script based hook within its <em>systemd-suspend.service</em> system service.</p>
+
+<p>To use this, all you need to do is put an executable script under /usr/lib/systemd/system-sleep/ that checks whether the first argument is ‘pre’ for before the system suspends, or ‘post’ for after the system wakes. The script can have any name.</p>
+
+<p>You can see more information in it’s man page:</p>
+
+<p><em>man systemd-suspend.service</em></p>
+
+<h1 id="the-script">The Script</h1>
+
+<p>To sort this once and for all on the HP ProBook I wrote the following into a file called <em>/lib/systemd/system-sleep/touchpad-reload</em>:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
+<span class="k">case</span> <span class="nv">$1</span> <span class="k">in
+  </span>post<span class="p">)</span>
+    /sbin/rmmod i2c_hid <span class="o">&amp;&amp;</span> /sbin/modprobe i2c_hid
+  <span class="p">;;</span>
+<span class="k">esac</span>
+
+</code></pre></div></div>
+
+<p>And now the touchpad is as happy post-suspend as it is on a fresh restart. Happy days!</p>
+
     </div>
 
     <footer class="post-footer">
@@ -191,7 +218,7 @@
     Photo of a Laptop Touchpad
 
 
-Having got used to my replacement laptop, I’ve decided to keep using it, but there was one thing a...&p[url]=https://meikle.io/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+Having got used to my replacement laptop, I’ve decided to keep using it, but there was one thing a...&p[url]=https://meikle.io/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></li>
                 <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/technology/hp-probook-touchpad-slow-after-suspend-ubuntu.html&text=
     
     Photo of a Laptop Touchpad
@@ -216,74 +243,6 @@ Having got used to my replacement laptop, I’ve decided to keep using it, but t
     </footer>
 </article>
 
-<article class="post" role="article" itemscope itemtype="http://schema.org/BlogPosting">
-    <header class="post-header">
-        <ul>
-            <li><time datetime="2019-08-02T06:00:00+01:00" itemprop="datePublished">2 Aug, 2019</time></li>
-            
-                <li class="cats">
-                    
-                        <a href="/categories/technology/">technology</a>
-                    
-                </li>
-            
-        </ul>
-        <h2 itemprop="name headline"><a href="https://meikle.io/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html">Cisco Meraki Client VPN on Ubuntu 19.04</a></h2>
-    </header>
-
-    <div class="post-content">
-        <figure class="aligncenter">
-    <img src="/assets/img/cisco-meraki.png" />
-    <figcaption>Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website</figcaption>
-</figure>
-
-<p>With my beloved, and worn, day to day laptop having to go in for repair, I had to setup a temporary laptop to work on for a few weeks.</p>
-
-<p>At work we use Cisco Meraki devices in many places, including the edge of network for our various offices. Whilst their main use is to form a mesh network around our offices and server infrastructure, we also use them to enable a lightweight Client VPN solution.</p>
-
-<p>The Cisco Meraki Client VPN option provides a L2TP/IPsec based VPN using either its own internal user store, an LDAP Directory, Microsoft Active Directory, or a Radius server to authenticate users.</p>
-
-<p>Cisco Meraki provide great instructions for Windows, Mac and mobile devices, but really old instructions for Linux. Therefore, I am posting this as much to remind me the next time I need to set it up as to help others.</p>
-
-
-
-        
-            <p><a href="/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html" role="button">Read More</a></p>
-        
-    </div>
-
-    <footer class="post-footer">
-        <div class="share">Share
-            <ul class="social-networks">
-                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Cisco Meraki Client VPN on Ubuntu 19.04&p[summary]=
-    
-    Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website
-
-
-With my beloved, and worn, day to day laptop having to go in f...&p[url]=https://meikle.io/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
-                <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/technology/cisco-meraki-client-vpn-on-ubuntu-1904.html&text=
-    
-    Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website
-
-
-With my beloved, and worn, day to day laptop having to go in f...&hashtags=technology,meraki,vpn," rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
-            </ul>
-        </div>
-        
-        <div class="tags">
-            <ul>
-                
-                <li><a href="https://meikle.io/tag/technology">technology</a></li>
-                
-                <li><a href="https://meikle.io/tag/meraki">meraki</a></li>
-                
-                <li><a href="https://meikle.io/tag/vpn">vpn</a></li>
-                
-            </ul>
-        </div>
-        
-    </footer>
-</article>
 
             </main>
         </div>
