@@ -5,9 +5,9 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 06 Dec 2019 19:03:58 +0000</pubDate>
-    <lastBuildDate>Fri, 06 Dec 2019 19:03:58 +0000</lastBuildDate>
-    <generator>Jekyll v3.8.4</generator>
+    <pubDate>Tue, 09 Jun 2020 23:39:50 +0100</pubDate>
+    <lastBuildDate>Tue, 09 Jun 2020 23:39:50 +0100</lastBuildDate>
+    <generator>Jekyll v4.1.0</generator>
     
       <item>
         <title>HP Probook Touchpad Slow After Supend Ubuntu 19.04</title>
@@ -44,12 +44,12 @@
 
 &lt;p&gt;To sort this once and for all on the HP ProBook I wrote the following into a file called &lt;em&gt;/lib/systemd/system-sleep/touchpad-reload&lt;/em&gt;:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/sh&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in
-  &lt;/span&gt;post&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    /sbin/rmmod i2c_hid &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; /sbin/modprobe i2c_hid
-  &lt;span class=&quot;p&quot;&gt;;;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;esac&lt;/span&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#!/bin/sh
+case $1 in
+  post)
+    /sbin/rmmod i2c_hid &amp;amp;&amp;amp; /sbin/modprobe i2c_hid
+  ;;
+esac
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
@@ -71,7 +71,7 @@
       </item>
     
       <item>
-        <title>Cisco Meraki Client VPN on Ubuntu 19.04</title>
+        <title>Cisco Meraki Client VPN on Ubuntu 19.04/19.10/20.04</title>
         <description>&lt;figure class=&quot;aligncenter&quot;&gt;
     &lt;img src=&quot;/assets/img/cisco-meraki.png&quot; /&gt;
     &lt;figcaption&gt;Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website&lt;/figcaption&gt;
@@ -91,7 +91,7 @@
 
 &lt;p&gt;By default, support for L2TP VPNs is not installed for Network Manager, so we need to install them:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install network-manager-l2tp
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install network-manager-l2tp
 sudo apt-get install network-manager-l2tp-gnome
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
@@ -102,7 +102,7 @@ sudo apt-get install network-manager-l2tp-gnome
 
 &lt;p&gt;To stop this from happening, we need to stop the deamon and disabling it from starting again:&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl stop xl2tpd
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl stop xl2tpd
 sudo systemctl disable xl2tpd
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 

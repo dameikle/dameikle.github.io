@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Cisco Meraki Client VPN on Ubuntu 19.04 | David Meikle &mdash; Software | Open Source | Localisation </title>
-    <meta property="og:title" content="Cisco Meraki Client VPN on Ubuntu 19.04 | David Meikle &mdash; Software | Open Source | Localisation " />
-    <meta name="twitter:title" content="Cisco Meraki Client VPN on Ubuntu 19.04 | David Meikle &mdash; Software | Open Source | Localisation " />
+    <title>Cisco Meraki Client VPN on Ubuntu 19.04/19.10/20.04 | David Meikle &mdash; Software | Open Source | Localisation </title>
+    <meta property="og:title" content="Cisco Meraki Client VPN on Ubuntu 19.04/19.10/20.04 | David Meikle &mdash; Software | Open Source | Localisation " />
+    <meta name="twitter:title" content="Cisco Meraki Client VPN on Ubuntu 19.04/19.10/20.04 | David Meikle &mdash; Software | Open Source | Localisation " />
 
     <meta name="description" content="I love to solve problems - often with software, always with tea.">
     <meta name="description" property="og:description" content="I love to solve problems - often with software, always with tea." />
@@ -160,7 +160,7 @@
                 
             
         </ul>
-        <h2 itemprop="name headline">Cisco Meraki Client VPN on Ubuntu 19.04</h2>
+        <h2 itemprop="name headline">Cisco Meraki Client VPN on Ubuntu 19.04/19.10/20.04</h2>
     </header>
 
     <div class="post-content">
@@ -183,7 +183,7 @@
 
 <p>By default, support for L2TP VPNs is not installed for Network Manager, so we need to install them:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install network-manager-l2tp
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install network-manager-l2tp
 sudo apt-get install network-manager-l2tp-gnome
 
 </code></pre></div></div>
@@ -194,7 +194,7 @@ sudo apt-get install network-manager-l2tp-gnome
 
 <p>To stop this from happening, we need to stop the deamon and disabling it from starting again:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl stop xl2tpd
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl stop xl2tpd
 sudo systemctl disable xl2tpd
 </code></pre></div></div>
 
@@ -251,7 +251,7 @@ sudo systemctl disable xl2tpd
     <footer class="post-footer">
         <div class="share">Share
             <ul class="social-networks">
-                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Cisco Meraki Client VPN on Ubuntu 19.04&p[summary]=
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Cisco Meraki Client VPN on Ubuntu 19.04/19.10/20.04&p[summary]=
     
     Photo of Meraki MX84 Meraki Firewall from Cisco Meraki website
 

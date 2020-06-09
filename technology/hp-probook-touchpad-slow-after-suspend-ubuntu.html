@@ -197,12 +197,12 @@
 
 <p>To sort this once and for all on the HP ProBook I wrote the following into a file called <em>/lib/systemd/system-sleep/touchpad-reload</em>:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/sh</span>
-<span class="k">case</span> <span class="nv">$1</span> <span class="k">in
-  </span>post<span class="p">)</span>
-    /sbin/rmmod i2c_hid <span class="o">&amp;&amp;</span> /sbin/modprobe i2c_hid
-  <span class="p">;;</span>
-<span class="k">esac</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/sh
+case $1 in
+  post)
+    /sbin/rmmod i2c_hid &amp;&amp; /sbin/modprobe i2c_hid
+  ;;
+esac
 
 </code></pre></div></div>
 
