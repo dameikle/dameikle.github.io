@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Apache Tika and the ObjectRecognitionParser (TensorFlow REST) | David Meikle &mdash; Software | Open Source | Localisation </title>
+    <meta property="og:title" content="Apache Tika and the ObjectRecognitionParser (TensorFlow REST) | David Meikle &mdash; Software | Open Source | Localisation " />
+    <meta name="twitter:title" content="Apache Tika and the ObjectRecognitionParser (TensorFlow REST) | David Meikle &mdash; Software | Open Source | Localisation " />
+
+    <meta name="description" content="I love to solve problems - often with software, always with tea.">
+    <meta name="description" property="og:description" content="I love to solve problems - often with software, always with tea." />
+    <meta name="twitter:description" content="I love to solve problems - often with software, always with tea." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:site" content="@dameikle" />
+    
+    <meta property="og:url" content="https://meikle.io/technology/opensource/apache-tika-and-objectrecognitionparser-tensorflow-rest.html" />
+
+    <meta property="og:image" content="" />
+    <meta name="twitter:image" content="" />
+
+    <meta name="author" content="David Meikle" />
+
+    <meta name="copyright" content="Copyright by David Meikle. All Rights Reserved." />
+
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v15/mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 300;
+            src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v15/vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 700;
+            src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v15/t6Nd4cfPRhZP44Q5QAjcC44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 900;
+            src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(https://fonts.gstatic.com/s/roboto/v15/bmC0pGMXrhphrZJmniIZpY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <link rel="stylesheet" href="https://meikle.io/assets/css/main.css">
+
+    <link rel="canonical" href="https://meikle.io/technology/opensource/apache-tika-and-objectrecognitionparser-tensorflow-rest.html">
+
+    <link rel="alternate" type="application/rss+xml" title="" href="https://meikle.io/feed.xml">
+</head>
+
+    <body>
+        <div class="wrapper">
+            <aside class="user-profile fixed" role="complementary">
+    <div class="burger">
+        <input class="trigger hidden" id="toggleBurger" type="checkbox" />
+        <label for="toggleBurger">
+            <span>Navigation</span>
+        </label>
+    </div>
+
+    <div class="compact-header">
+        <a class="avatar" href="https://meikle.io"><img alt="Avatar" src="/assets/img/me.jpg" /></a>
+        <div class="my-info">
+            <strong class="my-name">David Meikle</strong>
+            <span class="my-job-title">Software | Open Source | Localisation</span>
+        </div>
+    </div>
+
+    
+
+    <p class="about-me">I love to solve problems - often with software, always with tea.</p>
+
+    <ul class="socials">
+        <li><a href="http://twitter.com/dameikle" target="_blank"><svg title="twitter" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li><li><a href="http://github.com/dameikle" target="_blank"><svg title="github" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#github-icon"></use></svg></a></li><li><a href="https://stackoverflow.com/users/4063203/dave-meikle" target="_blank"><svg title="stack-overflow" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#stack-overflow-icon"></use></svg></a></li>
+
+        
+
+        
+         <li><a href="https://meikle.io/feed.xml"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#rss-icon"></use></svg></a></li>
+        
+    </ul>
+</aside>
+
+            <main class="the-content" role="main">
+                <div class="search" role="search">
+    <div>
+        <div class="show-results-count">0 Results</div>
+        <div class="search-holder">
+            <input type="text" id="search-input" placeholder="search for..." />
+        </div>
+    </div>
+    <ul id="results-container" class="results-container"></ul>
+</div>
+
+
+                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <ul>
+            <li><time datetime="2020-12-01T08:00:00+00:00" itemprop="datePublished">1 Dec, 2020</time></li>
+            
+                
+                <li class="cats">
+                    
+                        <a href="/categories/technology/">technology</a>
+                    
+                        <a href="/categories/opensource/">opensource</a>
+                    
+                </li>
+                
+            
+        </ul>
+        <h2 itemprop="name headline">Apache Tika and the ObjectRecognitionParser (TensorFlow REST)</h2>
+    </header>
+
+    <div class="post-content">
+        <figure class="aligncenter">
+    <img src="/assets/img/john-schnobrich-2FPjlAyMQTA-unsplash.jpg" />
+</figure>
+<p><i><span>Photo by <a href="https://unsplash.com/@johnschno?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">John Schnobrich</a> on <a href="https://unsplash.com/s/photos/tech?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span></i></p>
+
+<p>One of the coolest additions to <a href="https://tika.apache.org">Apache Tika</a> in the past few years has been the addition of Parsers that leverage Deep Learning to perform object recognition and captioning.</p>
+
+<p>Contributed by Chris Mattmann and Thejan Wijesinghe, through their work with <a href="https://github.com/USCDataScience/tika-dockers">USC Data Science</a>, you can configure Apache Tika to call of to predefined models and get deep learning equivalent of ‘Hello World’ - tagging dog or cat pictures!</p>
+
+<p>So let’s try it out.</p>
+
+<!--more-->
+
+<h2 id="apache-tika-and-the-objectrecognitionparser">Apache Tika and the ObjectRecognitionParser</h2>
+
+<h3 id="what-is-the-objectrecognitionparser">What is the ObjectRecognitionParser?</h3>
+
+<p>The <em>ObjectRecognitionParser</em> is a Parser that can be configured to recognise objects within content and annotate the metadata with information on the objects it has recognised.</p>
+
+<p>Internally, the recognised objects are returned in a <em>RecognisedObject</em> for generic objects or it’s <em>CaptionObject</em> sub-class for captioning:</p>
+
+<ul>
+  <li><em>RecognisedObject</em> instances contain an ID, Label, Label Language and Confidence Score.</li>
+  <li><em>CaptionObject</em> instances contain an ID, Caption Sentence, Caption Language and Confidence Score.</li>
+</ul>
+
+<p>Both types are placed in the metadata collection during parsing.</p>
+
+<p>The type of recognition to be performed needs to be defined within Apache Tika’s <em>tika-config.xml</em> through the configuration of <em>ObjectRecogniser</em> instances to be used by the parser.</p>
+
+<h3 id="available-object-recognisers">Available Object Recognisers</h3>
+
+<p>There are a number of <em>ObjectRecogniser</em> implementations in Apache Tika, including offline recognisers that need Deep Learning tools installed on the local machine (e.g. DL4J or Tensorflow) as well as online recognisers that make REST call to services.</p>
+
+<p>For now we are going to focus on the online recognisers, specifically ones that use Tensorflow REST APIs runnable in Docker from the <a href="https://github.com/USCDataScience/tika-dockers">USC Data Science</a> team.</p>
+
+<p>These are:</p>
+
+<ul>
+  <li>TensorflowRESTRecogniser - which uses a custom REST API around Tensorflow to perform recognition on images</li>
+  <li>TensorflowRESTVideoRecogniser - which uses a custom REST API around Tensorflow to perform recognition on videos</li>
+  <li>TensorflowRESTCaptioner - which uses a custom REST API around Tensorflow to perform image captioning</li>
+</ul>
+
+<p>These instances us an implementation based on the paper <a href="https://arxiv.org/abs/1411.4555">“Show and Tell: A Neural Image Caption Generator”</a> for captioning images, and the <a href="https://arxiv.org/abs/1602.07261">Inception-V4</a> model from Tensorflow for recognition in video and images.</p>
+
+<p>I’ll come back to the offline ones in another post.</p>
+
+<h2 id="lets-try-it-out-on-tika-server">Let’s try it out on Tika Server</h2>
+
+<h3 id="get-the-docker-images">Get the Docker Images</h3>
+
+<p>To make it easier to get up and running we’ll use Apache Tika Docker and the helper <em>docker-compose</em> file.</p>
+
+<p>First, get the <em>tika-docker</em> project from GitHub:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/apache/tika-docker</code></pre></figure>
+
+<p>In here is a file called <em>docker-compose-tika-vision.yml</em> which contains everything you need.</p>
+
+<p>To make it easier we’ll create a symlink to allow us to execute <em>docker-compose</em> without specifying the file each time:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">ln</span> <span class="nt">-s</span> docker-compose-tika-vision.yml docker-compose.yml</code></pre></figure>
+
+<h3 id="configure-our-instance">Configure our instance</h3>
+
+<p>Like most things is Apache Tika, the <em>ObjectRecogniser</em> can be configured using the <em>tika-config.xml</em> file format.</p>
+
+<p>To make things easier, there are three sample configuration to choose from to get your started:</p>
+
+<ul>
+  <li>sample-configs/inception-rest.xml - for image recognition</li>
+  <li>sample-configs/inception-rest-caption.xml - for image captioning</li>
+  <li>sample-configs/inception-rest-video.xml - for video recognition</li>
+</ul>
+
+<p>You can do this by leaving only the configuration file entry you wish to use uncommented (or present) in the <em>volumes</em> section of the <em>docker-compose</em> file.</p>
+
+<p>For example, to use image captioning you can leave the following set:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">volumes:
+ - ./sample-configs/inception-rest-caption.xml:/tika-config.xml</code></pre></figure>
+
+<h3 id="run-tika-server--inception-services">Run Tika Server + Inception Services</h3>
+
+<p>With the above configuration set in the <em>docker-compose.yml</em> file, you can now load up the containers:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose up</code></pre></figure>
+
+<p>Apache Tika Server will keep trying to reload until it can detect the configured Inception Service instance. If so want to avoid this, you can start the Inception Service first and then Tika.</p>
+
+<p>Once they are loaded, you can now send some files to it:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">wget https://upload.wikimedia.org/wikipedia/commons/f/f6/Working_Dogs%2C_Handlers_Share_Special_Bond_DVIDS124942.jpg <span class="nt">-O</span> test.jpg
+curl <span class="nt">-T</span> test.jpg htp://localhost:9998/meta</code></pre></figure>
+
+<p>This should then give you suggested captions as part of the metadata collection parsed:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s2">"org.apache.tika.parser.recognition.object.rec.impl"</span>,<span class="s2">"org.apache.tika.parser.captioning.tf.TensorflowRESTCaptioner"</span>
+<span class="s2">"X-Parsed-By"</span>,<span class="s2">"org.apache.tika.parser.CompositeParser"</span>,<span class="s2">"org.apache.tika.parser.recognition.ObjectRecognitionParser"</span>
+<span class="s2">"language"</span>,<span class="s2">"en"</span>
+<span class="s2">"CAPTION"</span>,<span class="s2">"a man standing next to a dog on a leash . (0.00022)"</span>,<span class="s2">"a man standing next to a dog on a bench . (0.00017)"</span>,<span class="s2">"a man and a dog sitting on a bench . (0.00011)"</span>,<span class="s2">"a man standing next to a dog in a park . (0.00007)"</span>,<span class="s2">"a man and a dog sitting on a bench (0.00006)"</span>
+<span class="s2">"Content-Type"</span>,<span class="s2">"image/jpeg"</span></code></pre></figure>
+
+<h2 id="how-about-the-tika-app">How about the Tika App?</h2>
+<p>You can also re-use the Inception Services from the <em>docker-compose.yml</em> file for the Apache Tika app interactively.</p>
+
+<p>To do the captioning, you can just start the inception service you want - in this case <em>inception-caption</em>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose up inception-caption </code></pre></figure>
+
+<p>You can then create a custom <em>tika-config.xml</em> and setting the appropriate <em>apiBaseUri</em></p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml">EOT &gt;&gt; tika-config.xml
+<span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;properties&gt;</span>
+    <span class="nt">&lt;parsers&gt;</span>
+        <span class="nt">&lt;parser</span> <span class="na">class=</span><span class="s">"org.apache.tika.parser.recognition.ObjectRecognitionParser"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;mime&gt;</span>image/jpeg<span class="nt">&lt;/mime&gt;</span>
+            <span class="nt">&lt;mime&gt;</span>image/png<span class="nt">&lt;/mime&gt;</span>
+            <span class="nt">&lt;mime&gt;</span>image/gif<span class="nt">&lt;/mime&gt;</span>
+            <span class="nt">&lt;params&gt;</span>
+                <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"apiBaseUri"</span> <span class="na">type=</span><span class="s">"uri"</span><span class="nt">&gt;</span>http://localhost:8765/inception/v3<span class="nt">&lt;/param&gt;</span>
+                <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"captions"</span> <span class="na">type=</span><span class="s">"int"</span><span class="nt">&gt;</span>5<span class="nt">&lt;/param&gt;</span>
+                <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"maxCaptionLength"</span> <span class="na">type=</span><span class="s">"int"</span><span class="nt">&gt;</span>15<span class="nt">&lt;/param&gt;</span>
+                <span class="nt">&lt;param</span> <span class="na">name=</span><span class="s">"class"</span> <span class="na">type=</span><span class="s">"string"</span><span class="nt">&gt;</span>org.apache.tika.parser.captioning.tf.TensorflowRESTCaptioner<span class="nt">&lt;/param&gt;</span>
+            <span class="nt">&lt;/params&gt;</span>
+        <span class="nt">&lt;/parser&gt;</span>
+    <span class="nt">&lt;/parsers&gt;</span>
+<span class="nt">&lt;/properties&gt;</span>
+EOT</code></pre></figure>
+
+<p>It’s worth noting in the sample configuration the <em>apiBaseUri</em> uses the Docker Compose service name and internal port. For running outside, you’ll need to use the external facing port mapping and IP/Hostname of the machine it is running on.</p>
+
+<p>Then you can run the Apache Tika App JAR using your custom configuration. For example, to launch it in GUI mode you could use:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">java <span class="nt">-jar</span> tika-app-1.25.jar <span class="nt">--config</span><span class="o">=</span>tika-config.xml <span class="nt">-g</span></code></pre></figure>
+
+<h2 id="whats-next">What’s next?</h2>
+<p>These REST based Tensorflow models are great examples of how Deep Learning can be used to augment the logic approach of Apache Tika for content parsing or detection.</p>
+
+<p>If you want to try adding basic tagging or captioning to your search or asset pipelines, these models could provide a start, or the REST API implementation provide inspiration for hosting your own Tensorflow models.</p>
+
+<p>It is an area that will continue to expand in the project and provides another API extension point where you can build your own <em>ObjectRecogniser</em> implementations. Happy Parsing!</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="share">Share
+            <ul class="social-networks">
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Apache Tika and the ObjectRecognitionParser (TensorFlow REST)&p[summary]=
+    
+
+Photo by John Schnobrich on Unsplash
+
+One of the coolest additions to Apache Tika in the past few years has been the addition of P...&p[url]=https://meikle.io/technology/opensource/apache-tika-and-objectrecognitionparser-tensorflow-rest.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/technology/opensource/apache-tika-and-objectrecognitionparser-tensorflow-rest.html&text=
+    
+
+Photo by John Schnobrich on Unsplash
+
+One of the coolest additions to Apache Tika in the past few years has been the addition of P...&hashtags=apache,tika,tensorflow," rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <ul>
+                
+                <li><a href="https://meikle.io/tag/apache">apache</a></li>
+                
+                <li><a href="https://meikle.io/tag/tika">tika</a></li>
+                
+                <li><a href="https://meikle.io/tag/tensorflow">tensorflow</a></li>
+                
+            </ul>
+        </div>
+        
+    </footer>
+</article>
+
+
+            </main>
+        </div>
+
+        <script src="https://meikle.io/assets/js/jquery-1.12.2.min.js"></script>
+<script src="https://meikle.io/assets/js/backtotop.js"></script>
+<script src="https://meikle.io/assets/js/lunr.min.js"></script>
+<script src="https://meikle.io/assets/js/lunr-feed.js"></script>
+<script src="https://meikle.io/assets/js/jquery.fitvids.js"></script>
+<script src="https://meikle.io/assets/js/svg4everybody.min.js"></script>
+<script src="https://meikle.io/assets/js/scripts.js"></script>
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-28104357-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    </body>
+</html>
