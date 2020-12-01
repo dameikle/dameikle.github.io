@@ -5,8 +5,8 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 01 Dec 2020 23:05:28 +0000</pubDate>
-    <lastBuildDate>Tue, 01 Dec 2020 23:05:28 +0000</lastBuildDate>
+    <pubDate>Tue, 01 Dec 2020 23:12:10 +0000</pubDate>
+    <lastBuildDate>Tue, 01 Dec 2020 23:12:10 +0000</lastBuildDate>
     <generator>Jekyll v4.1.0</generator>
     
       <item>
@@ -16,7 +16,7 @@
 &lt;/figure&gt;
 &lt;p&gt;&lt;i&gt;&lt;span&gt;Photo by &lt;a href=&quot;https://unsplash.com/@johnschno?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;John Schnobrich&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/tech?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/span&gt;&lt;/i&gt;&lt;/p&gt;
 
-&lt;p&gt;One of the coolest additions to &lt;a href=&quot;https://tika.apache.org&quot;&gt;Apache Tika&lt;/a&gt; in the past few years has been the addition of Parsers that leverage Deep Learning to perform object recognition and captioning.&lt;/p&gt;
+&lt;p&gt;One of the coolest new features added to &lt;a href=&quot;https://tika.apache.org&quot;&gt;Apache Tika&lt;/a&gt; in the past few years has been the addition of Parsers that leverage Deep Learning to perform object recognition and captioning.&lt;/p&gt;
 
 &lt;p&gt;Contributed by Chris Mattmann and Thejan Wijesinghe, through their work with &lt;a href=&quot;https://github.com/USCDataScience/tika-dockers&quot;&gt;USC Data Science&lt;/a&gt;, you can configure Apache Tika to call of to predefined models and get deep learning equivalent of ‘Hello World’ - tagging dog or cat pictures!&lt;/p&gt;
 
