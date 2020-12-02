@@ -5,14 +5,14 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 01 Dec 2020 23:12:10 +0000</pubDate>
-    <lastBuildDate>Tue, 01 Dec 2020 23:12:10 +0000</lastBuildDate>
+    <pubDate>Wed, 02 Dec 2020 20:37:06 +0000</pubDate>
+    <lastBuildDate>Wed, 02 Dec 2020 20:37:06 +0000</lastBuildDate>
     <generator>Jekyll v4.1.0</generator>
     
       <item>
         <title>Apache Tika and the ObjectRecognitionParser (TensorFlow REST)</title>
         <description>&lt;figure class=&quot;aligncenter&quot;&gt;
-    &lt;img src=&quot;/assets/img/john-schnobrich-2FPjlAyMQTA-unsplash.jpg&quot; /&gt;
+    &lt;img alt=&quot;people looking at a laptop screen&quot; src=&quot;/assets/img/john-schnobrich-2FPjlAyMQTA-unsplash.jpg&quot; /&gt;
 &lt;/figure&gt;
 &lt;p&gt;&lt;i&gt;&lt;span&gt;Photo by &lt;a href=&quot;https://unsplash.com/@johnschno?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;John Schnobrich&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/tech?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/span&gt;&lt;/i&gt;&lt;/p&gt;
 
