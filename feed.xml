@@ -5,9 +5,165 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 07 Dec 2020 23:07:45 +0000</pubDate>
-    <lastBuildDate>Mon, 07 Dec 2020 23:07:45 +0000</lastBuildDate>
+    <pubDate>Mon, 28 Dec 2020 15:50:07 +0000</pubDate>
+    <lastBuildDate>Mon, 28 Dec 2020 15:50:07 +0000</lastBuildDate>
     <generator>Jekyll v4.1.0</generator>
+    
+      <item>
+        <title>Apache Tika Docker Examples</title>
+        <description>&lt;figure class=&quot;aligncenter&quot;&gt;
+    &lt;img alt=&quot;woman reading book whilst drinking coffee&quot; src=&quot;/assets/img/priscilla-du-preez-WWD93Icc30Y-unsplash.jpg&quot; /&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;i&gt;
+    &lt;span&gt;Photo by &lt;a href=&quot;https://unsplash.com/@priscilladupreez?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/learning?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/span&gt;
+&lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;For a number of years I’ve been involved in the Apache Tika project as both a committer and &lt;a href=&quot;https://www.apache.org/foundation/governance/pmcs&quot; target=&quot;_blank&quot;&gt;PMC&lt;/a&gt; member.&lt;/p&gt;
+
+&lt;p&gt;With the increase in container technology usage over the past few years we spun up a separate repository for Apache Tika Server in Docker, called &lt;a href=&quot;https://github.com/apache/tika-docker&quot; target=&quot;_blank&quot;&gt;tika-docker&lt;/a&gt; with convenience images hosted on &lt;a href=&quot;https://hub.docker.com/r/apache/tika&quot; target=&quot;_blank&quot;&gt;Docker Hub&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This has resulted in questions on how to customise configuration and host instances that link to other services. To help people get started, we’ve created some example scenarios.&lt;/p&gt;
+
+&lt;p&gt;So let’s dive in and check them out.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;the-tika-docker-examples&quot;&gt;The tika-docker examples&lt;/h2&gt;
+
+&lt;p&gt;To get the examples started, we’ve created examples using &lt;a href=&quot;https://docs.docker.com/compose/&quot; target=&quot;_blank&quot;&gt;Docker Compose&lt;/a&gt; of the following scenarios:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Recognising and Captioning Video and Images with TensorFlow REST (&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/docker-compose-tika-vision.yml&quot; target=&quot;_blank&quot;&gt;see here&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Enriching Academic PDF Parsing with Grobid REST (&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/docker-compose-tika-grobid.yml&quot; target=&quot;_blank&quot;&gt;see here&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;OCR of PDF or Images with Tesseract including a Custom  Configuration (&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/docker-compose-tika-customocr.yml&quot; target=&quot;_blank&quot;&gt;see here&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Named Entity Recognition (&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/docker-compose-tika-ner.yml&quot; target=&quot;_blank&quot;&gt;see here&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;using-the-examples&quot;&gt;Using the examples&lt;/h3&gt;
+
+&lt;h5 id=&quot;install-docker-and-docker-compose&quot;&gt;Install Docker and Docker Compose&lt;/h5&gt;
+
+&lt;p&gt;Follow the instructions for install &lt;em&gt;docker&lt;/em&gt; from &lt;a href=&quot;https://docs.docker.com/get-docker/&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Follow the instructions for installing &lt;em&gt;docker-compose&lt;/em&gt; from &lt;a href=&quot;https://docs.docker.com/compose/install/&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h5 id=&quot;clone-the-tika-docker&quot;&gt;Clone the tika-docker&lt;/h5&gt;
+
+&lt;p&gt;Now fetch the docker-compose files and sample configuation from the &lt;em&gt;tika-docker&lt;/em&gt; project on GitHub:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/apache/tika-docker&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h5 id=&quot;run-docker-compose-for-example-you-want&quot;&gt;Run Docker Compose for Example You Want&lt;/h5&gt;
+
+&lt;p&gt;First change into the tika-docker directory&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;tika-docker&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Then you can execute docker-compose for the example you wish to try. For example, to try the Named Entity Recognition (NER) example you can:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;docker-compose &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; docker-compose-tika-ner.yml up &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can drop the -d if you want to stay attached to the containers.&lt;/p&gt;
+
+&lt;p&gt;Then if you supplied a text file with some sample data to the &lt;em&gt;/meta&lt;/em&gt; endpoint:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOT&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; &amp;gt;&amp;gt; test.txt
+Hello world from the Apache Tika Team (dev@tika.apache.org).
+&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOT
+&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-T&lt;/span&gt; test.txt http://localhost:9998/meta&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;The RegEx Entity Recogniser configured in the &lt;a href=&quot;https://github.com/apache/tika-docker/tree/master/sample-configs/ner&quot; target=&quot;_blank&quot;&gt;NER sample configuration files&lt;/a&gt; would extract the email in the returned metadata:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&quot;X-Parsed-By&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;org.apache.tika.parser.CompositeParser&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;org.apache.tika.parser.ner.NamedEntityParser&quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&quot;language&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;en&quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&quot;NER_EMAIL&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;dev@tika.apache.org&quot;&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;&quot;Content-Type&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;text/plain&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can then stop the running containers using&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;docker-compose &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; docker-compose-tika-ner.yml down&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;customising-the-examples&quot;&gt;Customising the examples&lt;/h3&gt;
+
+&lt;p&gt;Each of the examples comes with associated set of configuration files in the &lt;a href=&quot;https://github.com/apache/tika-docker/tree/master/sample-configs&quot; target=&quot;_blank&quot;&gt;sample-configs&lt;/a&gt; directory.&lt;/p&gt;
+
+&lt;p&gt;Each sample has an appropriately named subfolder, with the associated Tika Config XML file(s) and any other configuration resources, such as properties files specifying URLs or settings.&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;├── customocr
+│   ├── org
+│   │   └── apache
+│   │       └── tika
+│   │           └── parser
+│   │               └── ocr
+│   │                   └── TesseractOCRConfig.properties
+│   ├── tika-config-inline.xml
+│   └── tika-config-rendered.xml
+├── grobid
+│   ├── org
+│   │   └── apache
+│   │       └── tika
+│   │           └── parser
+│   │               └── journal
+│   │                   └── GrobidExtractor.properties
+│   └── tika-config.xml
+├── ner
+│   ├── run_tika_server.sh
+│   └── tika-config.xml
+└── vision
+    ├── inception-rest-caption.xml
+    ├── inception-rest-video.xml
+    └── inception-rest.xml&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h5 id=&quot;tika-config-xml&quot;&gt;Tika Config XML&lt;/h5&gt;
+
+&lt;p&gt;All of the scenarios have &lt;a href=&quot;https://tika.apache.org/1.25/configuring.html&quot; target=&quot;_blank&quot;&gt;Tika Config XML&lt;/a&gt; files. These files configure the parsers or recognisers for the example.&lt;/p&gt;
+
+&lt;p&gt;In some cases this file is named &lt;em&gt;tika-config.xml&lt;/em&gt; and is then loaded in the docker-compose file directly. In other examples, such as the Vision and OCR ones, the docker-compose file loads only one of the XML configurations as the default &lt;em&gt;tika-config.xml&lt;/em&gt; through a volume mount.&lt;/p&gt;
+
+&lt;p&gt;For example, in the the Vision configuration for the Parsing and Captioning Video or Images with TensorFlow REST, you have a choice of three configurations:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest-caption.xml&quot; target=&quot;_blank&quot;&gt;inception-rest-caption.xml&lt;/a&gt; - for image captioning&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest-video.xml&quot; target=&quot;_blank&quot;&gt;inception-rest-video.xml&lt;/a&gt; - for object recognition in videos&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest.xml&quot; target=&quot;_blank&quot;&gt;inception-rest.xml&lt;/a&gt; - for object recognition in images&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can chose which you want to use by leaving commented the appropriate configuration in the &lt;em&gt;docker-compose-tika-vision.yml&lt;/em&gt; file within the &lt;em&gt;volumes&lt;/em&gt; section:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#... snip ...&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# Replace the below with the configuration you want to use, or with your own custom one &lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# -  ./sample-configs/vision/inception-rest.xml:/tika-config.xml&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# -  ./sample-configs/vision/inception-rest-video.xml:/tika-config.xml&lt;/span&gt;
+  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;./sample-configs/vision/inception-rest-caption.xml:/tika-config.xml&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#... snip ...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;You can find more on ObjectRecognition and the TensorFlow in Apache Tika Server from my previous blog post &lt;a href=&quot;/technology/opensource/apache-tika-and-objectrecognitionparser-tensorflow-rest.html&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;want-more&quot;&gt;Want more?&lt;/h2&gt;
+
+&lt;p&gt;I plan to write most specific blog posts, similar to the Tensorflow REST one, on each of these example scenarios. So please subscribe to the &lt;a href=&quot;/feed.xml&quot; target=&quot;_blank&quot;&gt;RSS feed&lt;/a&gt; for this blog if you are interested.&lt;/p&gt;
+
+&lt;p&gt;If you would like to see other examples like this, either let me know directly on GitHub or Twitter, or message on the Apache Tika Users or Developer &lt;a href=&quot;https://tika.apache.org/mail-lists.html&quot; target=&quot;_blank&quot;&gt;mailing lists&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Mon, 28 Dec 2020 08:00:00 +0000</pubDate>
+        <link>https://meikle.io/technology/opensource/apache-tika-docker-examples.html</link>
+        <guid isPermaLink="true">https://meikle.io/technology/opensource/apache-tika-docker-examples.html</guid>
+        
+        <category>apache</category>
+        
+        <category>tika</category>
+        
+        <category>examples</category>
+        
+        
+        <category>technology</category>
+        
+        <category>opensource</category>
+        
+      </item>
     
       <item>
         <title>Apache Tika and the ObjectRecognitionParser for Object Recognition and Captioning Using TensorFlow REST.</title>

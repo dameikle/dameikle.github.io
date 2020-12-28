@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Apache Tika Docker Examples | David Meikle &mdash; Software | Open Source | Localisation </title>
+    <meta property="og:title" content="Apache Tika Docker Examples | David Meikle &mdash; Software | Open Source | Localisation " />
+    <meta name="twitter:title" content="Apache Tika Docker Examples | David Meikle &mdash; Software | Open Source | Localisation " />
+    <meta name="description" content="Apache Tika Docker has some new docker-compose based examples for more complex scenarios. Learn how to use them in the post.">
+    <meta name="description" property="og:description" content="Apache Tika Docker has some new docker-compose based examples for more complex scenarios. Learn how to use them in the post." />
+    <meta name="twitter:description" content="Apache Tika Docker has some new docker-compose based examples for more complex scenarios. Learn how to use them in the post." />
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:site" content="@dameikle" />
+    
+    <meta property="og:url" content="https://meikle.io/technology/opensource/apache-tika-docker-examples.html" />
+
+    <meta property="og:image" content="" />
+    <meta name="twitter:image" content="" />
+
+    <meta name="author" content="David Meikle" />
+
+    <meta name="copyright" content="Copyright by David Meikle. All Rights Reserved." />
+
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v15/mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 300;
+            src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v15/vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 700;
+            src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v15/t6Nd4cfPRhZP44Q5QAjcC44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 900;
+            src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(https://fonts.gstatic.com/s/roboto/v15/bmC0pGMXrhphrZJmniIZpY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <link rel="stylesheet" href="https://meikle.io/assets/css/main.css">
+
+    <link rel="canonical" href="https://meikle.io/technology/opensource/apache-tika-docker-examples.html">
+
+    <link rel="alternate" type="application/rss+xml" title="" href="https://meikle.io/feed.xml">
+    
+</head>
+
+    <body>
+        <div class="wrapper">
+            <aside class="user-profile fixed" role="complementary">
+    <div class="burger">
+        <input class="trigger hidden" id="toggleBurger" type="checkbox" />
+        <label for="toggleBurger">
+            <span>Navigation</span>
+        </label>
+    </div>
+
+    <div class="compact-header">
+        <a class="avatar" href="https://meikle.io"><img alt="Avatar" src="/assets/img/me.jpg" /></a>
+        <div class="my-info">
+            <strong class="my-name">David Meikle</strong>
+            <span class="my-job-title">Software | Open Source | Localisation</span>
+        </div>
+    </div>
+
+    
+
+    <p class="about-me">I love to solve problems - often with software, always with tea.</p>
+
+    <ul class="socials">
+        <li><a href="http://twitter.com/dameikle" target="_blank"><svg title="twitter" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li><li><a href="http://github.com/dameikle" target="_blank"><svg title="github" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#github-icon"></use></svg></a></li><li><a href="https://stackoverflow.com/users/4063203/dave-meikle" target="_blank"><svg title="stack-overflow" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#stack-overflow-icon"></use></svg></a></li>
+
+        
+
+        
+         <li><a href="https://meikle.io/feed.xml"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#rss-icon"></use></svg></a></li>
+        
+    </ul>
+</aside>
+
+            <main class="the-content" role="main">
+                <div class="search" role="search">
+    <div>
+        <div class="show-results-count">0 Results</div>
+        <div class="search-holder">
+            <input type="text" id="search-input" placeholder="search for..." />
+        </div>
+    </div>
+    <ul id="results-container" class="results-container"></ul>
+</div>
+
+
+                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <ul>
+            <li><time datetime="2020-12-28T08:00:00+00:00" itemprop="datePublished">28 Dec, 2020</time></li>
+            
+                
+                <li class="cats">
+                    
+                        <a href="/categories/technology/">technology</a>
+                    
+                        <a href="/categories/opensource/">opensource</a>
+                    
+                </li>
+                
+            
+        </ul>
+        <h2 itemprop="name headline">Apache Tika Docker Examples</h2>
+    </header>
+
+    <div class="post-content">
+        <figure class="aligncenter">
+    <img alt="woman reading book whilst drinking coffee" src="/assets/img/priscilla-du-preez-WWD93Icc30Y-unsplash.jpg" />
+</figure>
+<p><i>
+    <span>Photo by <a href="https://unsplash.com/@priscilladupreez?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Priscilla Du Preez</a> on <a href="https://unsplash.com/s/photos/learning?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+</i></p>
+
+<p>For a number of years I’ve been involved in the Apache Tika project as both a committer and <a href="https://www.apache.org/foundation/governance/pmcs" target="_blank">PMC</a> member.</p>
+
+<p>With the increase in container technology usage over the past few years we spun up a separate repository for Apache Tika Server in Docker, called <a href="https://github.com/apache/tika-docker" target="_blank">tika-docker</a> with convenience images hosted on <a href="https://hub.docker.com/r/apache/tika" target="_blank">Docker Hub</a></p>
+
+<p>This has resulted in questions on how to customise configuration and host instances that link to other services. To help people get started, we’ve created some example scenarios.</p>
+
+<p>So let’s dive in and check them out.</p>
+
+<!--more-->
+
+<h2 id="the-tika-docker-examples">The tika-docker examples</h2>
+
+<p>To get the examples started, we’ve created examples using <a href="https://docs.docker.com/compose/" target="_blank">Docker Compose</a> of the following scenarios:</p>
+
+<ul>
+  <li>Recognising and Captioning Video and Images with TensorFlow REST (<a href="https://github.com/apache/tika-docker/blob/master/docker-compose-tika-vision.yml" target="_blank">see here</a>)</li>
+  <li>Enriching Academic PDF Parsing with Grobid REST (<a href="https://github.com/apache/tika-docker/blob/master/docker-compose-tika-grobid.yml" target="_blank">see here</a>)</li>
+  <li>OCR of PDF or Images with Tesseract including a Custom  Configuration (<a href="https://github.com/apache/tika-docker/blob/master/docker-compose-tika-customocr.yml" target="_blank">see here</a>)</li>
+  <li>Named Entity Recognition (<a href="https://github.com/apache/tika-docker/blob/master/docker-compose-tika-ner.yml" target="_blank">see here</a>)</li>
+</ul>
+
+<h3 id="using-the-examples">Using the examples</h3>
+
+<h5 id="install-docker-and-docker-compose">Install Docker and Docker Compose</h5>
+
+<p>Follow the instructions for install <em>docker</em> from <a href="https://docs.docker.com/get-docker/" target="_blank">here</a>.</p>
+
+<p>Follow the instructions for installing <em>docker-compose</em> from <a href="https://docs.docker.com/compose/install/" target="_blank">here</a>.</p>
+
+<h5 id="clone-the-tika-docker">Clone the tika-docker</h5>
+
+<p>Now fetch the docker-compose files and sample configuation from the <em>tika-docker</em> project on GitHub:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git clone https://github.com/apache/tika-docker</code></pre></figure>
+
+<h5 id="run-docker-compose-for-example-you-want">Run Docker Compose for Example You Want</h5>
+
+<p>First change into the tika-docker directory</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>tika-docker</code></pre></figure>
+
+<p>Then you can execute docker-compose for the example you wish to try. For example, to try the Named Entity Recognition (NER) example you can:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">-f</span> docker-compose-tika-ner.yml up <span class="nt">-d</span></code></pre></figure>
+
+<p>You can drop the -d if you want to stay attached to the containers.</p>
+
+<p>Then if you supplied a text file with some sample data to the <em>/meta</em> endpoint:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="no">EOT</span><span class="sh"> &gt;&gt; test.txt
+Hello world from the Apache Tika Team (dev@tika.apache.org).
+</span><span class="no">EOT
+</span>curl <span class="nt">-T</span> test.txt http://localhost:9998/meta</code></pre></figure>
+
+<p>The RegEx Entity Recogniser configured in the <a href="https://github.com/apache/tika-docker/tree/master/sample-configs/ner" target="_blank">NER sample configuration files</a> would extract the email in the returned metadata:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="s2">"X-Parsed-By"</span>,<span class="s2">"org.apache.tika.parser.CompositeParser"</span>,<span class="s2">"org.apache.tika.parser.ner.NamedEntityParser"</span>
+<span class="s2">"language"</span>,<span class="s2">"en"</span>
+<span class="s2">"NER_EMAIL"</span>,<span class="s2">"dev@tika.apache.org"</span>
+<span class="s2">"Content-Type"</span>,<span class="s2">"text/plain"</span></code></pre></figure>
+
+<p>You can then stop the running containers using</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">-f</span> docker-compose-tika-ner.yml down</code></pre></figure>
+
+<h3 id="customising-the-examples">Customising the examples</h3>
+
+<p>Each of the examples comes with associated set of configuration files in the <a href="https://github.com/apache/tika-docker/tree/master/sample-configs" target="_blank">sample-configs</a> directory.</p>
+
+<p>Each sample has an appropriately named subfolder, with the associated Tika Config XML file(s) and any other configuration resources, such as properties files specifying URLs or settings.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">├── customocr
+│   ├── org
+│   │   └── apache
+│   │       └── tika
+│   │           └── parser
+│   │               └── ocr
+│   │                   └── TesseractOCRConfig.properties
+│   ├── tika-config-inline.xml
+│   └── tika-config-rendered.xml
+├── grobid
+│   ├── org
+│   │   └── apache
+│   │       └── tika
+│   │           └── parser
+│   │               └── journal
+│   │                   └── GrobidExtractor.properties
+│   └── tika-config.xml
+├── ner
+│   ├── run_tika_server.sh
+│   └── tika-config.xml
+└── vision
+    ├── inception-rest-caption.xml
+    ├── inception-rest-video.xml
+    └── inception-rest.xml</code></pre></figure>
+
+<h5 id="tika-config-xml">Tika Config XML</h5>
+
+<p>All of the scenarios have <a href="https://tika.apache.org/1.25/configuring.html" target="_blank">Tika Config XML</a> files. These files configure the parsers or recognisers for the example.</p>
+
+<p>In some cases this file is named <em>tika-config.xml</em> and is then loaded in the docker-compose file directly. In other examples, such as the Vision and OCR ones, the docker-compose file loads only one of the XML configurations as the default <em>tika-config.xml</em> through a volume mount.</p>
+
+<p>For example, in the the Vision configuration for the Parsing and Captioning Video or Images with TensorFlow REST, you have a choice of three configurations:</p>
+
+<ul>
+  <li><a href="https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest-caption.xml" target="_blank">inception-rest-caption.xml</a> - for image captioning</li>
+  <li><a href="https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest-video.xml" target="_blank">inception-rest-video.xml</a> - for object recognition in videos</li>
+  <li><a href="https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest.xml" target="_blank">inception-rest.xml</a> - for object recognition in images</li>
+</ul>
+
+<p>You can chose which you want to use by leaving commented the appropriate configuration in the <em>docker-compose-tika-vision.yml</em> file within the <em>volumes</em> section:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1">#... snip ...</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="c1"># Replace the below with the configuration you want to use, or with your own custom one </span>
+  <span class="c1"># -  ./sample-configs/vision/inception-rest.xml:/tika-config.xml</span>
+  <span class="c1"># -  ./sample-configs/vision/inception-rest-video.xml:/tika-config.xml</span>
+  <span class="pi">-</span>  <span class="s">./sample-configs/vision/inception-rest-caption.xml:/tika-config.xml</span>
+
+<span class="c1">#... snip ...</span></code></pre></figure>
+
+<p>You can find more on ObjectRecognition and the TensorFlow in Apache Tika Server from my previous blog post <a href="/technology/opensource/apache-tika-and-objectrecognitionparser-tensorflow-rest.html" target="_blank">here</a>.</p>
+
+<h2 id="want-more">Want more?</h2>
+
+<p>I plan to write most specific blog posts, similar to the Tensorflow REST one, on each of these example scenarios. So please subscribe to the <a href="/feed.xml" target="_blank">RSS feed</a> for this blog if you are interested.</p>
+
+<p>If you would like to see other examples like this, either let me know directly on GitHub or Twitter, or message on the Apache Tika Users or Developer <a href="https://tika.apache.org/mail-lists.html" target="_blank">mailing lists</a>.</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="share">Share
+            <ul class="social-networks">
+
+            
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Apache Tika Docker Examples&p[summary]=Apache Tika Docker has some new docker-compose based examples for more complex scenarios. Learn how to use them in the post.&p[url]=https://meikle.io/technology/opensource/apache-tika-docker-examples.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/technology/opensource/apache-tika-docker-examples.html&text=Apache Tika Docker has some new docker-compose based examples for more complex scenarios. Learn how to use them in the post.&hashtags=apache,tika,examples," rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+            
+
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <ul>
+                
+                <li><a href="https://meikle.io/tag/apache">apache</a></li>
+                
+                <li><a href="https://meikle.io/tag/tika">tika</a></li>
+                
+                <li><a href="https://meikle.io/tag/examples">examples</a></li>
+                
+            </ul>
+        </div>
+        
+    </footer>
+</article>
+
+
+            </main>
+        </div>
+
+        <script src="https://meikle.io/assets/js/jquery-1.12.2.min.js"></script>
+<script src="https://meikle.io/assets/js/backtotop.js"></script>
+<script src="https://meikle.io/assets/js/lunr.min.js"></script>
+<script src="https://meikle.io/assets/js/lunr-feed.js"></script>
+<script src="https://meikle.io/assets/js/jquery.fitvids.js"></script>
+<script src="https://meikle.io/assets/js/svg4everybody.min.js"></script>
+<script src="https://meikle.io/assets/js/scripts.js"></script>
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-28104357-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    </body>
+</html>
