@@ -8,9 +8,11 @@
     <title>Category: opensource | David Meikle &mdash; Software | Open Source | Localisation </title>
     <meta property="og:title" content="Category: opensource | David Meikle &mdash; Software | Open Source | Localisation " />
     <meta name="twitter:title" content="Category: opensource | David Meikle &mdash; Software | Open Source | Localisation " />
+
     <meta name="description" content="Category: opensource">
     <meta name="description" property="og:description" content="Category: opensource" />
     <meta name="twitter:description" content="Category: opensource" />
+
     <meta name="twitter:card" content="summary_large_image" />
     
     <meta name="twitter:site" content="@dameikle" />
@@ -151,73 +153,65 @@
 <article class="post" role="article" itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
         <ul>
-            <li><time datetime="2020-12-28T08:00:00+00:00" itemprop="datePublished">28 Dec, 2020</time></li>
+            <li><time datetime="2022-07-16T08:00:00+01:00" itemprop="datePublished">16 Jul, 2022</time></li>
             
                 <li class="cats">
                     
-                        <a href="/categories/technology/">technology</a>
+                        <a href="/categories/localization/">localization</a>
                     
                         <a href="/categories/opensource/">opensource</a>
                     
                 </li>
             
         </ul>
-        <h2 itemprop="name headline"><a href="https://meikle.io/technology/opensource/apache-tika-docker-examples.html">Apache Tika Docker Examples</a></h2>
+        <h2 itemprop="name headline"><a href="https://meikle.io/localization/opensource/new-okapi-maven-plugin.html">Okapi Maven Plugin</a></h2>
     </header>
 
     <div class="post-content">
         <figure class="aligncenter">
-    <img alt="woman reading book whilst drinking coffee" src="/assets/img/priscilla-du-preez-WWD93Icc30Y-unsplash.jpg" />
+    <img alt="people looking at a laptop screen" src="/assets/img/safar-safarov-MSN8TFhJ0is-unsplash.jpg" />
 </figure>
-<p><i>
-    <span>Photo by <a href="https://unsplash.com/@priscilladupreez?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Priscilla Du Preez</a> on <a href="https://unsplash.com/s/photos/learning?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
-</i></p>
+<p><i><span>Photo by <a href="https://unsplash.com/@codestorm?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Safar Safarov</a> on <a href="https://unsplash.com/s/photos/code-on-a-laptop-screen?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span></i></p>
 
-<p>For a number of years I’ve been involved in the Apache Tika project as both a committer and <a href="https://www.apache.org/foundation/governance/pmcs" target="_blank">PMC</a> member.</p>
+<p>In the work we did at <a href="https://www.lingo24.com">Lingo24</a> when I was there, we made use of the <a href="https://okapiframework.org/">Okapi Framework</a> - well a customised fork - as a key component in our content processing.</p>
 
-<p>With the increase in container technology usage over the past few years we spun up a separate repository for Apache Tika Server in Docker, called <a href="https://github.com/apache/tika-docker" target="_blank">tika-docker</a> with convenience images hosted on <a href="https://hub.docker.com/r/apache/tika" target="_blank">Docker Hub</a></p>
+<p>For those who don’t know the framework, it an excellent swiss-army like toolkit for localisation (l18n)/translation (t8n), which can be used either as a set of libraries or standalone tools.</p>
 
-<p>This has resulted in questions on how to customise configuration and host instances that link to other services. To help people get started, we’ve created some example scenarios.</p>
+<p>Whilst the tools available are great, often I wanted to bundle part of the process within an existing CI/CD pipeline or build. As a heavy Maven user, and with winter nights setting in, the idea came to build a Maven plugin to do just that.</p>
 
-<p>So let’s dive in and check them out.</p>
+<p>The result? The <a href="https://github.com/dameikle/okapi-maven-plugin">Okapi Maven Plugin</a>.</p>
 
 
 
         
-            <p><a href="/technology/opensource/apache-tika-docker-examples.html" role="button">Read More</a></p>
+            <p><a href="/localization/opensource/new-okapi-maven-plugin.html" role="button">Read More</a></p>
         
     </div>
 
     <footer class="post-footer">
         <div class="share">Share
             <ul class="social-networks">
-                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Apache Tika Docker Examples&p[summary]=
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Okapi Maven Plugin&p[summary]=
     
 
+Photo by Safar Safarov on Unsplash
 
-    Photo by Priscilla Du Preez on Unsplash
-
-
-For a number of years I’ve been involved in the Apache Tika project as both a commi...&p[url]=https://meikle.io/technology/opensource/apache-tika-docker-examples.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
-                <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/technology/opensource/apache-tika-docker-examples.html&text=
+In the work we did at Lingo24 when I was there, we made use of the Okapi Framework - well a cu...&p[url]=https://meikle.io/localization/opensource/new-okapi-maven-plugin.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/localization/opensource/new-okapi-maven-plugin.html&text=
     
 
+Photo by Safar Safarov on Unsplash
 
-    Photo by Priscilla Du Preez on Unsplash
-
-
-For a number of years I’ve been involved in the Apache Tika project as both a commi...&hashtags=apache,tika,examples," rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+In the work we did at Lingo24 when I was there, we made use of the Okapi Framework - well a cu...&hashtags=okapi,maven-plugin," rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
             </ul>
         </div>
         
         <div class="tags">
             <ul>
                 
-                <li><a href="https://meikle.io/tag/apache">apache</a></li>
+                <li><a href="https://meikle.io/tag/okapi">okapi</a></li>
                 
-                <li><a href="https://meikle.io/tag/tika">tika</a></li>
-                
-                <li><a href="https://meikle.io/tag/examples">examples</a></li>
+                <li><a href="https://meikle.io/tag/maven-plugin">maven-plugin</a></li>
                 
             </ul>
         </div>

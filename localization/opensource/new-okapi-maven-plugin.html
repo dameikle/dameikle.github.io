@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Okapi Maven Plugin | David Meikle &mdash; Software | Open Source | Localisation </title>
+    <meta property="og:title" content="Okapi Maven Plugin | David Meikle &mdash; Software | Open Source | Localisation " />
+    <meta name="twitter:title" content="Okapi Maven Plugin | David Meikle &mdash; Software | Open Source | Localisation " />
+
+    <meta name="description" content="Introducing the Maven Plugin for Okapi Framework.">
+    <meta name="description" property="og:description" content="Introducing the Maven Plugin for Okapi Framework." />
+    <meta name="twitter:description" content="Introducing the Maven Plugin for Okapi Framework." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    
+    <meta name="twitter:site" content="@dameikle" />
+    
+    <meta property="og:url" content="https://meikle.io/localization/opensource/new-okapi-maven-plugin.html" />
+
+    <meta property="og:image" content="" />
+    <meta name="twitter:image" content="" />
+
+    <meta name="author" content="David Meikle" />
+
+    <meta name="copyright" content="Copyright by David Meikle. All Rights Reserved." />
+
+    <style>
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfVtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/CWB0XYA8bzo0kSThX0UTuA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOFtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: normal;
+            font-weight: 900;
+            src: local('Roboto Black'), local('Roboto-Black'), url(https://fonts.gstatic.com/s/roboto/v15/mnpfi9pxYH-Go5UiibESIltXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 300;
+            src: local('Roboto Light Italic'), local('Roboto-LightItalic'), url(https://fonts.gstatic.com/s/roboto/v15/7m8l7TlFO-S3VkhHuR0at44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 400;
+            src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v15/vPcynSL0qHq_6dX7lKVByfesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 700;
+            src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v15/t6Nd4cfPRhZP44Q5QAjcC44P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
+        @font-face {
+            font-family: 'Roboto';
+            font-style: italic;
+            font-weight: 900;
+            src: local('Roboto Black Italic'), local('Roboto-BlackItalic'), url(https://fonts.gstatic.com/s/roboto/v15/bmC0pGMXrhphrZJmniIZpY4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+    </style>
+    
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    
+    <link rel="stylesheet" href="https://meikle.io/assets/css/main.css">
+
+    <link rel="canonical" href="https://meikle.io/localization/opensource/new-okapi-maven-plugin.html">
+
+    <link rel="alternate" type="application/rss+xml" title="" href="https://meikle.io/feed.xml">
+    
+</head>
+
+    <body>
+        <div class="wrapper">
+            <aside class="user-profile fixed" role="complementary">
+    <div class="burger">
+        <input class="trigger hidden" id="toggleBurger" type="checkbox" />
+        <label for="toggleBurger">
+            <span>Navigation</span>
+        </label>
+    </div>
+
+    <div class="compact-header">
+        <a class="avatar" href="https://meikle.io"><img alt="Avatar" src="/assets/img/me.jpg" /></a>
+        <div class="my-info">
+            <strong class="my-name">David Meikle</strong>
+            <span class="my-job-title">Software | Open Source | Localisation</span>
+        </div>
+    </div>
+
+    
+
+    <p class="about-me">I love to solve problems - often with software, always with tea.</p>
+
+    <ul class="socials">
+        <li><a href="http://twitter.com/dameikle" target="_blank"><svg title="twitter" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li><li><a href="http://github.com/dameikle" target="_blank"><svg title="github" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#github-icon"></use></svg></a></li><li><a href="https://stackoverflow.com/users/4063203/dave-meikle" target="_blank"><svg title="stack-overflow" width="16" height="16" ><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#stack-overflow-icon"></use></svg></a></li>
+
+        
+
+        
+         <li><a href="https://meikle.io/feed.xml"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#rss-icon"></use></svg></a></li>
+        
+    </ul>
+</aside>
+
+            <main class="the-content" role="main">
+                <div class="search" role="search">
+    <div>
+        <div class="show-results-count">0 Results</div>
+        <div class="search-holder">
+            <input type="text" id="search-input" placeholder="search for..." />
+        </div>
+    </div>
+    <ul id="results-container" class="results-container"></ul>
+</div>
+
+
+                <article class="post single" role="article" itemscope itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+        <ul>
+            <li><time datetime="2022-07-16T08:00:00+01:00" itemprop="datePublished">16 Jul, 2022</time></li>
+            
+                
+                <li class="cats">
+                    
+                        <a href="/categories/localization/">localization</a>
+                    
+                        <a href="/categories/opensource/">opensource</a>
+                    
+                </li>
+                
+            
+        </ul>
+        <h2 itemprop="name headline">Okapi Maven Plugin</h2>
+    </header>
+
+    <div class="post-content">
+        <figure class="aligncenter">
+    <img alt="people looking at a laptop screen" src="/assets/img/safar-safarov-MSN8TFhJ0is-unsplash.jpg" />
+</figure>
+<p><i><span>Photo by <a href="https://unsplash.com/@codestorm?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Safar Safarov</a> on <a href="https://unsplash.com/s/photos/code-on-a-laptop-screen?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span></i></p>
+
+<p>In the work we did at <a href="https://www.lingo24.com">Lingo24</a> when I was there, we made use of the <a href="https://okapiframework.org/">Okapi Framework</a> - well a customised fork - as a key component in our content processing.</p>
+
+<p>For those who don’t know the framework, it an excellent swiss-army like toolkit for localisation (l18n)/translation (t8n), which can be used either as a set of libraries or standalone tools.</p>
+
+<p>Whilst the tools available are great, often I wanted to bundle part of the process within an existing CI/CD pipeline or build. As a heavy Maven user, and with winter nights setting in, the idea came to build a Maven plugin to do just that.</p>
+
+<p>The result? The <a href="https://github.com/dameikle/okapi-maven-plugin">Okapi Maven Plugin</a>.</p>
+
+<!--more-->
+
+<h2 id="the-okapi-maven-plugin">The Okapi Maven Plugin</h2>
+
+<p>The <a href="https://github.com/dameikle/okapi-maven-plugin">Okapi Maven Plugin</a> is a Maven plugin that allows execution of common actions using the <a href="http://okapiframework.org">Okapi Framework</a> within a Maven Project.</p>
+
+<p>It was inspired by the excellent <a href="https://github.com/tingley/okapi-ant">okapi-ant</a> project, written by Chase Tingley, one of the core Okapi Framework team. (Hey Chase 👋🏻)</p>
+
+<p>Very much designed to scratch what was an immediate itch, it currently supports performing the following actions:</p>
+<ul>
+  <li>Execute a Pipeline</li>
+  <li>Export a Batch Configuration (BCONF)</li>
+  <li>Install a Batch Configuration (BCONF)</li>
+</ul>
+
+<h3 id="using-the-okapi-maven-plugin">Using the Okapi Maven Plugin</h3>
+<p>The plugin is being released on <a href="https://central.sonatype.org">Maven Central</a>, so to use the plug-in you can simply include it in your project’s POM file in the plugins section.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
+  <span class="nt">&lt;plugins&gt;</span>
+    <span class="nt">&lt;plugin&gt;</span>
+      <span class="nt">&lt;groupId&gt;</span>io.meikle.maven.okapi<span class="nt">&lt;/groupId&gt;</span>
+      <span class="nt">&lt;artifactId&gt;</span>okapi-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+      <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+      <span class="nt">&lt;configuration&gt;</span>
+          <span class="c">&lt;!-- Configuration required here --&gt;</span>
+      <span class="nt">&lt;/configuration&gt;</span>
+    <span class="nt">&lt;/plugin&gt;</span>
+  <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div></div>
+
+<h3 id="okapi-version">Okapi Version</h3>
+
+<p>By default, the plugin uses the latest <em>Okapi Framework</em> version, which at the time of writing it is 1.42.0.</p>
+
+<p>You can validate the version being used by running the <em>okapi:version</em> goal.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mvn okapi:version
+</code></pre></div></div>
+
+<p>This can be changed by overriding the <em>Okapi Framework</em>’s <em>okapi-core</em> and <em>okapi-application-rainbow</em> dependencies in the plugin configuration.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;build&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="nt">&lt;plugin&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>io.meikle.maven.okapi<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>okapi-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>
+                ...
+            <span class="nt">&lt;/configuration&gt;</span>
+            <span class="nt">&lt;dependencies&gt;</span>
+                <span class="nt">&lt;dependency&gt;</span>
+                    <span class="nt">&lt;groupId&gt;</span>net.sf.okapi<span class="nt">&lt;/groupId&gt;</span>
+                    <span class="nt">&lt;artifactId&gt;</span>okapi-core<span class="nt">&lt;/artifactId&gt;</span>
+                    <span class="nt">&lt;version&gt;</span>1.41.0<span class="nt">&lt;/version&gt;</span>
+                <span class="nt">&lt;/dependency&gt;</span>
+                <span class="nt">&lt;dependency&gt;</span>
+                    <span class="nt">&lt;groupId&gt;</span>net.sf.okapi.applications<span class="nt">&lt;/groupId&gt;</span>
+                    <span class="nt">&lt;artifactId&gt;</span>okapi-application-rainbow<span class="nt">&lt;/artifactId&gt;</span>
+                    <span class="nt">&lt;version&gt;</span>1.41.0<span class="nt">&lt;/version&gt;</span>
+                    <span class="c">&lt;!-- Exclude non-required UI dependencies --&gt;</span>
+                    <span class="nt">&lt;exclusions&gt;</span>
+                        <span class="nt">&lt;exclusion&gt;</span>
+                            <span class="nt">&lt;artifactId&gt;</span>*<span class="nt">&lt;/artifactId&gt;</span>
+                            <span class="nt">&lt;groupId&gt;</span>org.eclipse.platform<span class="nt">&lt;/groupId&gt;</span>
+                        <span class="nt">&lt;/exclusion&gt;</span>
+                    <span class="nt">&lt;/exclusions&gt;</span>
+                <span class="nt">&lt;/dependency&gt;</span>
+            <span class="nt">&lt;/dependencies&gt;</span>
+        <span class="nt">&lt;/plugin&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+<span class="nt">&lt;/build&gt;</span>
+</code></pre></div></div>
+
+<h3 id="binary-configurations">Binary Configurations</h3>
+
+<p>One of the main use cases for the plugin is to support the building of <em>Binary Configurations</em>, also known as a <em>BCONF</em>.</p>
+
+<p>A BCONF is a single file binary bundle of a number of configuration items:</p>
+
+<ul>
+  <li><i>File Filter Settings</i> - the settings on how a file is processed</li>
+  <li><i>File Mappings</i> - the mapping of file extensions to file filter settings</li>
+  <li><i>Pipelines</i> - the configurations determing the steps to be performed on the content</li>
+  <li><i>Plugin JARs</i> - optional JAR(s) with custom code, typically file filters or steps.</li>
+</ul>
+
+<p>The ability to bundle them together in a single <em>BCONF</em> them useful for sharing settings amongst colleagues, or when using the <em>Longhorn</em> server application for executing Okapi Framework processing.</p>
+
+<p>Building <em>BCONF</em> files can be done from the <em>Rainbow</em> application interface provided by the Okapi Framework. To do this you configure the settings you want in the application and can then <em>export</em> a configuration.</p>
+
+<p>The inverse process is also supported, allowing you to <em>import</em> a configuration to a particular directory so it’s contents can be used within the application.</p>
+
+<p>To help with these operations, the <em>Okapi Maven Plugin</em> allows you to build and install <em>BCONF</em> files as part of your build.</p>
+
+<h4 id="okapiexport">okapi:export</h4>
+
+<p>The <em>export</em> goal builds and export a Binary Configuration file and can be configured to package up configuration items in a number of scenarios.</p>
+
+<p>By default, the goal only has one mandatory parameter, <em>bconf</em>. This is the name or path to where the Binary Configuration file should be exported to.</p>
+
+<p>The rest of the parameters are optional, allowing you to either package a pipeline and the filter mappings and/or plugins required to successfully execute it within Longhorn, or simply bundle a set configuration assets for sharing.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;configuration&gt;</span>
+    <span class="c">&lt;!-- Mandatory Name or Path to Export the BCONF to --&gt;</span>
+    <span class="nt">&lt;bconf&gt;</span>export.bconf<span class="nt">&lt;/bconf&gt;</span>
+    <span class="c">&lt;!-- Optional Pipeline to be used in the BCONF --&gt;</span>
+    <span class="nt">&lt;pipeline&gt;</span>test.pln<span class="nt">&lt;/pipeline&gt;</span>
+    <span class="c">&lt;!-- Optional Custom Filter Mapping(s) to be embedded in the BCONF --&gt;</span>
+    <span class="nt">&lt;filterMappings&gt;</span> 
+        <span class="nt">&lt;filterMapping&gt;</span>
+            <span class="c">&lt;!-- File extension to be mapped --&gt;</span>
+            <span class="nt">&lt;extension&gt;</span>.htm<span class="nt">&lt;/extension&gt;</span>
+            <span class="c">&lt;!-- Configuration to be used --&gt;</span>
+            <span class="nt">&lt;configuration&gt;</span>okf_html@test<span class="nt">&lt;/configuration&gt;</span>
+        <span class="nt">&lt;/filterMapping&gt;</span>
+    <span class="nt">&lt;/filterMappings&gt;</span>
+    <span class="c">&lt;!-- Optional Plugins to be included in the BCONF using Maven FileSet format- --&gt;</span>
+    <span class="c">&lt;!-- See https://maven.apache.org/shared/file-management/fileset.html for more details --&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="c">&lt;!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir --&gt;</span>
+        <span class="c">&lt;!-- defaults to project baseDir --&gt;</span>
+        <span class="nt">&lt;directory&gt;</span>input<span class="nt">&lt;/directory&gt;</span>
+        <span class="c">&lt;!-- Optional - Includes or Excludes --&gt;</span>
+        <span class="nt">&lt;includes&gt;</span>
+            <span class="nt">&lt;include&gt;</span>**/*.jar<span class="nt">&lt;/include&gt;</span>
+        <span class="nt">&lt;/includes&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+    <span class="c">&lt;!-- Optional output directory for the Okapi pipeline --&gt;</span>
+    <span class="c">&lt;!-- Defaults to the Maven target directory --&gt;</span>
+    <span class="nt">&lt;outputDirectory&gt;</span>/tmp<span class="nt">&lt;/outputDirectory&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+
+<h4 id="okapiinstall">okapi:install</h4>
+
+<p>The <em>install</em> goal installs a Binary Configuration file (a bconf) to a folder on the local machine so it can be used.</p>
+
+<p>The configuration for this goal has two mandatory items:</p>
+<ul>
+  <li><em>bconf</em> - the location of the BCONF file to install</li>
+  <li><em>outputDirectory</em> - the folder to install the BCONF to</li>
+</ul>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;configuration&gt;</span>
+  <span class="nt">&lt;bconf&gt;</span>export.bconf<span class="nt">&lt;/bconf&gt;</span>
+  <span class="nt">&lt;outputDirectory&gt;</span>/tmp/install-test<span class="nt">&lt;/outputDirectory&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+
+<p>Both paths can be absolute or relative to the Maven Project’s <em>baseDir</em>, which can be useful when chaining with the <em>pipeline</em> goal.</p>
+
+<h3 id="pipelines">Pipelines</h3>
+
+<p>At the core of the Okapi Framework is the concept of a <em>pipeline</em> - a list of actions in sequence that can be applied to or more input documents. Each action is a <em>step</em> in Okapi parlance, which when chained together can build very powerful and complex translation workflows.</p>
+
+<p>Pipelines can be developed using the user interface in Okapi <em>Rainbow</em> or via an XML format, with the framework supplying a significant library of out-of-the-box steps and pipelines for common actions in translation workflow. Like everything in Okapi, you can build your own steps.</p>
+
+<p>To help with executing pipelines, the <em>Okapi Maven Plugin</em> allows you to execute pre-defined pipelines as part of your build.</p>
+
+<h4 id="okapiexecute">okapi:execute</h4>
+
+<p>The <em>execute</em> goal executes a pipeline contained in a pipeline configuration file (a pln file) against the supplied input file(s).</p>
+
+<p>By default, the goal has four mandatory parameters:</p>
+<ul>
+  <li>pipeline - the path to the pipeline file</li>
+  <li>inputFiles - the input files to process, defined using a FileSet</li>
+  <li>sourceLang - the source language name or code of the content</li>
+  <li>targetLang - the target language  name or code of the content</li>
+</ul>
+
+<p>There are many other configuration options available to allow you to specify additional options for customised filter configurations, plugin locations, or override default locations. These can be useful if you are embedding your own custom assets into a build.</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;configuration&gt;</span>
+    <span class="c">&lt;!-- Mandatory Path to pipeline to execute --&gt;</span>
+    <span class="nt">&lt;pipeline&gt;</span>test.pln<span class="nt">&lt;/pipeline&gt;</span>
+    <span class="c">&lt;!-- Mandatory inputFiles using Maven FileSet format--&gt;</span>
+    <span class="c">&lt;!-- See https://maven.apache.org/shared/file-management/fileset.html for more details --&gt;</span>
+    <span class="nt">&lt;inputFiles&gt;</span>
+        <span class="c">&lt;!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir --&gt;</span>
+        <span class="c">&lt;!-- defaults to project baseDir --&gt;</span>
+        <span class="nt">&lt;directory&gt;</span>input<span class="nt">&lt;/directory&gt;</span>
+        <span class="c">&lt;!-- Optional - Includes or Excludes --&gt;</span>
+        <span class="nt">&lt;includes&gt;</span>
+            <span class="nt">&lt;include&gt;</span>**/*.txt<span class="nt">&lt;/include&gt;</span>
+            <span class="nt">&lt;include&gt;</span>**/*.md<span class="nt">&lt;/include&gt;</span>
+        <span class="nt">&lt;/includes&gt;</span>
+        <span class="nt">&lt;excludes&gt;</span>
+            <span class="nt">&lt;exclude&gt;</span>**/*.xml<span class="nt">&lt;/exclude&gt;</span>
+        <span class="nt">&lt;/excludes&gt;</span>
+    <span class="nt">&lt;/inputFiles&gt;</span>
+    <span class="c">&lt;!-- Mandatory Source Language Name or Code--&gt;</span>
+    <span class="nt">&lt;sourceLang&gt;</span>English<span class="nt">&lt;/sourceLang&gt;</span>
+    <span class="c">&lt;!-- Mandatory Target Language Name or Code--&gt;</span>
+    <span class="nt">&lt;targetLang&gt;</span>fr-FR<span class="nt">&lt;/targetLang&gt;</span>
+    <span class="c">&lt;!-- Optional directory containing custom plugins --&gt;</span>
+    <span class="c">&lt;!-- Defaults to the project directory --&gt;</span>
+    <span class="nt">&lt;pluginsDirectory&gt;</span>pluginsDir<span class="nt">&lt;/pluginsDirectory&gt;</span>
+    <span class="c">&lt;!-- Optional Explicit Plugins using Maven FileSet format- --&gt;</span>
+    <span class="c">&lt;!-- See https://maven.apache.org/shared/file-management/fileset.html for more details --&gt;</span>
+    <span class="nt">&lt;plugins&gt;</span>
+        <span class="c">&lt;!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir --&gt;</span>
+        <span class="c">&lt;!-- defaults to project baseDir --&gt;</span>
+        <span class="nt">&lt;directory&gt;</span>input<span class="nt">&lt;/directory&gt;</span>
+        <span class="c">&lt;!-- Optional - Includes or Excludes --&gt;</span>
+        <span class="nt">&lt;includes&gt;</span>
+            <span class="nt">&lt;include&gt;</span>**/*.jar<span class="nt">&lt;/include&gt;</span>
+        <span class="nt">&lt;/includes&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+    <span class="c">&lt;!-- Optional directory containing custom filters --&gt;</span>
+    <span class="c">&lt;!-- Defaults to the project directory --&gt;</span>
+    <span class="nt">&lt;filtersDirectory&gt;</span>filtersDir<span class="nt">&lt;/filtersDirectory&gt;</span>
+    <span class="c">&lt;!-- Optional output directory for the Okapi pipeline --&gt;</span>
+    <span class="c">&lt;!-- Defaults to the Maven target directory --&gt;</span>
+    <span class="nt">&lt;outputDirectory&gt;</span>/tmp<span class="nt">&lt;/outputDirectory&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div></div>
+
+<h2 id="next-steps">Next Steps</h2>
+
+<p>Whilst I moved on from Lingo24 before being able to use the plugin in anger, I have continued to use it for automating actions on some personal projects. I plan to keep evolving it as and when I get a chance, so would love feedback on what could be better or additional features that would be handy.</p>
+
+<p>Happy translating!</p>
+
+    </div>
+
+    <footer class="post-footer">
+        <div class="share">Share
+            <ul class="social-networks">
+                <li class="share-facebook"><a href="https://www.facebook.com/sharer.php?s=100&p[title]=Okapi Maven Plugin&p[summary]=
+    
+
+Photo by Safar Safarov on Unsplash
+
+In the work we did at Lingo24 when I was there, we made use of the Okapi Framework - well a cu...&p[url]=https://meikle.io/localization/opensource/new-okapi-maven-plugin.html" class="s_facebook" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#facebook-icon"></use></svg></a></li>
+                <li class="share-twitter"><a href="http://twitter.com/share?url=https://meikle.io/localization/opensource/new-okapi-maven-plugin.html&text=
+    
+
+Photo by Safar Safarov on Unsplash
+
+In the work we did at Lingo24 when I was there, we made use of the Okapi Framework - well a cu...&hashtags=okapi,maven-plugin," rel="noreferrer" target="_blank" onclick="window.open(this.href, '','width=700,height=300');return false;"><svg title="" width="16" height="16"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://meikle.io/assets/svg/social-icons.svg#twitter-icon"></use></svg></a></li>
+            </ul>
+        </div>
+        
+        <div class="tags">
+            <ul>
+                
+                <li><a href="https://meikle.io/tag/okapi">okapi</a></li>
+                
+                <li><a href="https://meikle.io/tag/maven-plugin">maven-plugin</a></li>
+                
+            </ul>
+        </div>
+        
+    </footer>
+</article>
+
+
+            </main>
+        </div>
+
+        <script src="https://meikle.io/assets/js/jquery-1.12.2.min.js"></script>
+<script src="https://meikle.io/assets/js/backtotop.js"></script>
+<script src="https://meikle.io/assets/js/lunr.min.js"></script>
+<script src="https://meikle.io/assets/js/lunr-feed.js"></script>
+<script src="https://meikle.io/assets/js/jquery.fitvids.js"></script>
+<script src="https://meikle.io/assets/js/svg4everybody.min.js"></script>
+<script src="https://meikle.io/assets/js/scripts.js"></script>
+
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-28104357-3', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+    </body>
+</html>

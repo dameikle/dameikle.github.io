@@ -5,161 +5,262 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Dec 2020 16:05:29 +0000</pubDate>
-    <lastBuildDate>Mon, 28 Dec 2020 16:05:29 +0000</lastBuildDate>
-    <generator>Jekyll v4.1.0</generator>
+    <pubDate>Sun, 17 Jul 2022 23:15:22 +0100</pubDate>
+    <lastBuildDate>Sun, 17 Jul 2022 23:15:22 +0100</lastBuildDate>
+    <generator>Jekyll v4.2.1</generator>
     
       <item>
-        <title>Apache Tika Docker Examples</title>
+        <title>Okapi Maven Plugin</title>
         <description>&lt;figure class=&quot;aligncenter&quot;&gt;
-    &lt;img alt=&quot;woman reading book whilst drinking coffee&quot; src=&quot;/assets/img/priscilla-du-preez-WWD93Icc30Y-unsplash.jpg&quot; /&gt;
+    &lt;img alt=&quot;people looking at a laptop screen&quot; src=&quot;/assets/img/safar-safarov-MSN8TFhJ0is-unsplash.jpg&quot; /&gt;
 &lt;/figure&gt;
-&lt;p&gt;&lt;i&gt;
-    &lt;span&gt;Photo by &lt;a href=&quot;https://unsplash.com/@priscilladupreez?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Priscilla Du Preez&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/learning?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/span&gt;
-&lt;/i&gt;&lt;/p&gt;
+&lt;p&gt;&lt;i&gt;&lt;span&gt;Photo by &lt;a href=&quot;https://unsplash.com/@codestorm?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Safar Safarov&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/s/photos/code-on-a-laptop-screen?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText&quot;&gt;Unsplash&lt;/a&gt;&lt;/span&gt;&lt;/i&gt;&lt;/p&gt;
 
-&lt;p&gt;For a number of years I’ve been involved in the Apache Tika project as both a committer and &lt;a href=&quot;https://www.apache.org/foundation/governance/pmcs&quot; target=&quot;_blank&quot;&gt;PMC&lt;/a&gt; member.&lt;/p&gt;
+&lt;p&gt;In the work we did at &lt;a href=&quot;https://www.lingo24.com&quot;&gt;Lingo24&lt;/a&gt; when I was there, we made use of the &lt;a href=&quot;https://okapiframework.org/&quot;&gt;Okapi Framework&lt;/a&gt; - well a customised fork - as a key component in our content processing.&lt;/p&gt;
 
-&lt;p&gt;With the increase in container technology usage over the past few years we spun up a separate repository for Apache Tika Server in Docker, called &lt;a href=&quot;https://github.com/apache/tika-docker&quot; target=&quot;_blank&quot;&gt;tika-docker&lt;/a&gt; with convenience images hosted on &lt;a href=&quot;https://hub.docker.com/r/apache/tika&quot; target=&quot;_blank&quot;&gt;Docker Hub&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;For those who don’t know the framework, it an excellent swiss-army like toolkit for localisation (l18n)/translation (t8n), which can be used either as a set of libraries or standalone tools.&lt;/p&gt;
 
-&lt;p&gt;This has resulted in questions on how to customise configuration and host instances that link to other services. To help people get started, we’ve created some example scenarios.&lt;/p&gt;
+&lt;p&gt;Whilst the tools available are great, often I wanted to bundle part of the process within an existing CI/CD pipeline or build. As a heavy Maven user, and with winter nights setting in, the idea came to build a Maven plugin to do just that.&lt;/p&gt;
 
-&lt;p&gt;So let’s dive in and check them out.&lt;/p&gt;
+&lt;p&gt;The result? The &lt;a href=&quot;https://github.com/dameikle/okapi-maven-plugin&quot;&gt;Okapi Maven Plugin&lt;/a&gt;.&lt;/p&gt;
 
 &lt;!--more--&gt;
 
-&lt;h2 id=&quot;the-tika-docker-examples&quot;&gt;The tika-docker examples&lt;/h2&gt;
+&lt;h2 id=&quot;the-okapi-maven-plugin&quot;&gt;The Okapi Maven Plugin&lt;/h2&gt;
 
-&lt;p&gt;To get the examples started, we’ve created examples using &lt;a href=&quot;https://docs.docker.com/compose/&quot; target=&quot;_blank&quot;&gt;Docker Compose&lt;/a&gt; of the following scenarios:&lt;/p&gt;
+&lt;p&gt;The &lt;a href=&quot;https://github.com/dameikle/okapi-maven-plugin&quot;&gt;Okapi Maven Plugin&lt;/a&gt; is a Maven plugin that allows execution of common actions using the &lt;a href=&quot;http://okapiframework.org&quot;&gt;Okapi Framework&lt;/a&gt; within a Maven Project.&lt;/p&gt;
 
+&lt;p&gt;It was inspired by the excellent &lt;a href=&quot;https://github.com/tingley/okapi-ant&quot;&gt;okapi-ant&lt;/a&gt; project, written by Chase Tingley, one of the core Okapi Framework team. (Hey Chase 👋🏻)&lt;/p&gt;
+
+&lt;p&gt;Very much designed to scratch what was an immediate itch, it currently supports performing the following actions:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;Recognising and Captioning Video and Images with TensorFlow REST (&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/docker-compose-tika-vision.yml&quot; target=&quot;_blank&quot;&gt;see here&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Enriching Academic PDF Parsing with Grobid REST (&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/docker-compose-tika-grobid.yml&quot; target=&quot;_blank&quot;&gt;see here&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;OCR of PDF or Images with Tesseract including a Custom  Configuration (&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/docker-compose-tika-customocr.yml&quot; target=&quot;_blank&quot;&gt;see here&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;Named Entity Recognition (&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/docker-compose-tika-ner.yml&quot; target=&quot;_blank&quot;&gt;see here&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Execute a Pipeline&lt;/li&gt;
+  &lt;li&gt;Export a Batch Configuration (BCONF)&lt;/li&gt;
+  &lt;li&gt;Install a Batch Configuration (BCONF)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;using-the-examples&quot;&gt;Using the examples&lt;/h3&gt;
+&lt;h3 id=&quot;using-the-okapi-maven-plugin&quot;&gt;Using the Okapi Maven Plugin&lt;/h3&gt;
+&lt;p&gt;The plugin is being released on &lt;a href=&quot;https://central.sonatype.org&quot;&gt;Maven Central&lt;/a&gt;, so to use the plug-in you can simply include it in your project’s POM file in the plugins section.&lt;/p&gt;
 
-&lt;h5 id=&quot;install-docker-and-docker-compose&quot;&gt;Install Docker and Docker Compose&lt;/h5&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.meikle.maven.okapi&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;okapi-maven-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Configuration required here --&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Follow the instructions for install &lt;em&gt;docker&lt;/em&gt; from &lt;a href=&quot;https://docs.docker.com/get-docker/&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;okapi-version&quot;&gt;Okapi Version&lt;/h3&gt;
 
-&lt;p&gt;Follow the instructions for installing &lt;em&gt;docker-compose&lt;/em&gt; from &lt;a href=&quot;https://docs.docker.com/compose/install/&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;By default, the plugin uses the latest &lt;em&gt;Okapi Framework&lt;/em&gt; version, which at the time of writing it is 1.42.0.&lt;/p&gt;
 
-&lt;h5 id=&quot;clone-the-tika-docker&quot;&gt;Clone the tika-docker&lt;/h5&gt;
+&lt;p&gt;You can validate the version being used by running the &lt;em&gt;okapi:version&lt;/em&gt; goal.&lt;/p&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mvn okapi:version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Now fetch the docker-compose files and sample configuation from the &lt;em&gt;tika-docker&lt;/em&gt; project on GitHub:&lt;/p&gt;
+&lt;p&gt;This can be changed by overriding the &lt;em&gt;Okapi Framework&lt;/em&gt;’s &lt;em&gt;okapi-core&lt;/em&gt; and &lt;em&gt;okapi-application-rainbow&lt;/em&gt; dependencies in the plugin configuration.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;git clone https://github.com/apache/tika-docker&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.meikle.maven.okapi&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;okapi-maven-plugin&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                ...
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;net.sf.okapi&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;okapi-core&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.41.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;net.sf.okapi.applications&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;okapi-application-rainbow&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.41.0&lt;span class=&quot;nt&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Exclude non-required UI dependencies --&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;exclusions&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;exclusion&amp;gt;&lt;/span&gt;
+                            &lt;span class=&quot;nt&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;*&lt;span class=&quot;nt&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+                            &lt;span class=&quot;nt&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.eclipse.platform&lt;span class=&quot;nt&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/exclusion&amp;gt;&lt;/span&gt;
+                    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/exclusions&amp;gt;&lt;/span&gt;
+                &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h5 id=&quot;run-docker-compose-for-example-you-want&quot;&gt;Run Docker Compose for Example You Want&lt;/h5&gt;
+&lt;h3 id=&quot;binary-configurations&quot;&gt;Binary Configurations&lt;/h3&gt;
 
-&lt;p&gt;First change into the tika-docker directory&lt;/p&gt;
+&lt;p&gt;One of the main use cases for the plugin is to support the building of &lt;em&gt;Binary Configurations&lt;/em&gt;, also known as a &lt;em&gt;BCONF&lt;/em&gt;.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;tika-docker&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;Then you can execute docker-compose for the example you wish to try. For example, to try the Named Entity Recognition (NER) example you can:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;docker-compose &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; docker-compose-tika-ner.yml up &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;You can drop the -d if you want to stay attached to the containers.&lt;/p&gt;
-
-&lt;p&gt;Then if you supplied a text file with some sample data to the &lt;em&gt;/meta&lt;/em&gt; endpoint:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cat&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOT&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt; &amp;gt;&amp;gt; test.txt
-Hello world from the Apache Tika Team (dev@tika.apache.org).
-&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;EOT
-&lt;/span&gt;curl &lt;span class=&quot;nt&quot;&gt;-T&lt;/span&gt; test.txt http://localhost:9998/meta&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;The RegEx Entity Recogniser configured in the &lt;a href=&quot;https://github.com/apache/tika-docker/tree/master/sample-configs/ner&quot; target=&quot;_blank&quot;&gt;NER sample configuration files&lt;/a&gt; would extract the email in the returned metadata:&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;s2&quot;&gt;&quot;X-Parsed-By&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;org.apache.tika.parser.CompositeParser&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;org.apache.tika.parser.ner.NamedEntityParser&quot;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;language&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;en&quot;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;NER_EMAIL&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;dev@tika.apache.org&quot;&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;&quot;Content-Type&quot;&lt;/span&gt;,&lt;span class=&quot;s2&quot;&gt;&quot;text/plain&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;You can then stop the running containers using&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;docker-compose &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; docker-compose-tika-ner.yml down&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h3 id=&quot;customising-the-examples&quot;&gt;Customising the examples&lt;/h3&gt;
-
-&lt;p&gt;Each of the examples comes with associated set of configuration files in the &lt;a href=&quot;https://github.com/apache/tika-docker/tree/master/sample-configs&quot; target=&quot;_blank&quot;&gt;sample-configs&lt;/a&gt; directory.&lt;/p&gt;
-
-&lt;p&gt;Each sample has an appropriately named subfolder, with the associated Tika Config XML file(s) and any other configuration resources, such as properties files specifying URLs or settings.&lt;/p&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;├── customocr
-│   ├── org
-│   │   └── apache
-│   │       └── tika
-│   │           └── parser
-│   │               └── ocr
-│   │                   └── TesseractOCRConfig.properties
-│   ├── tika-config-inline.xml
-│   └── tika-config-rendered.xml
-├── grobid
-│   ├── org
-│   │   └── apache
-│   │       └── tika
-│   │           └── parser
-│   │               └── journal
-│   │                   └── GrobidExtractor.properties
-│   └── tika-config.xml
-├── ner
-│   ├── run_tika_server.sh
-│   └── tika-config.xml
-└── vision
-    ├── inception-rest-caption.xml
-    ├── inception-rest-video.xml
-    └── inception-rest.xml&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;h5 id=&quot;tika-config-xml&quot;&gt;Tika Config XML&lt;/h5&gt;
-
-&lt;p&gt;All of the scenarios have &lt;a href=&quot;https://tika.apache.org/1.25/configuring.html&quot; target=&quot;_blank&quot;&gt;Tika Config XML&lt;/a&gt; files. These files configure the parsers or recognisers for the example.&lt;/p&gt;
-
-&lt;p&gt;In some cases this file is named &lt;em&gt;tika-config.xml&lt;/em&gt; and is then loaded in the docker-compose file directly. In other examples, such as the Vision and OCR ones, the docker-compose file loads only one of the XML configurations as the default &lt;em&gt;tika-config.xml&lt;/em&gt; through a volume mount.&lt;/p&gt;
-
-&lt;p&gt;For example, in the the Vision configuration for the Parsing and Captioning Video or Images with TensorFlow REST, you have a choice of three configurations:&lt;/p&gt;
+&lt;p&gt;A BCONF is a single file binary bundle of a number of configuration items:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest-caption.xml&quot; target=&quot;_blank&quot;&gt;inception-rest-caption.xml&lt;/a&gt; - for image captioning&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest-video.xml&quot; target=&quot;_blank&quot;&gt;inception-rest-video.xml&lt;/a&gt; - for object recognition in videos&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/tika-docker/blob/master/sample-configs/vision/inception-rest.xml&quot; target=&quot;_blank&quot;&gt;inception-rest.xml&lt;/a&gt; - for object recognition in images&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;File Filter Settings&lt;/i&gt; - the settings on how a file is processed&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;File Mappings&lt;/i&gt; - the mapping of file extensions to file filter settings&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;Pipelines&lt;/i&gt; - the configurations determing the steps to be performed on the content&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;Plugin JARs&lt;/i&gt; - optional JAR(s) with custom code, typically file filters or steps.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;You can chose which you want to use by leaving commented the appropriate configuration in the &lt;em&gt;docker-compose-tika-vision.yml&lt;/em&gt; file within the &lt;em&gt;volumes&lt;/em&gt; section:&lt;/p&gt;
+&lt;p&gt;The ability to bundle them together in a single &lt;em&gt;BCONF&lt;/em&gt; them useful for sharing settings amongst colleagues, or when using the &lt;em&gt;Longhorn&lt;/em&gt; server application for executing Okapi Framework processing.&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;c1&quot;&gt;#... snip ...&lt;/span&gt;
+&lt;p&gt;Building &lt;em&gt;BCONF&lt;/em&gt; files can be done from the &lt;em&gt;Rainbow&lt;/em&gt; application interface provided by the Okapi Framework. To do this you configure the settings you want in the application and can then &lt;em&gt;export&lt;/em&gt; a configuration.&lt;/p&gt;
 
-&lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# Replace the below with the configuration you want to use, or with your own custom one &lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# -  ./sample-configs/vision/inception-rest.xml:/tika-config.xml&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;# -  ./sample-configs/vision/inception-rest-video.xml:/tika-config.xml&lt;/span&gt;
-  &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;./sample-configs/vision/inception-rest-caption.xml:/tika-config.xml&lt;/span&gt;
+&lt;p&gt;The inverse process is also supported, allowing you to &lt;em&gt;import&lt;/em&gt; a configuration to a particular directory so it’s contents can be used within the application.&lt;/p&gt;
 
-&lt;span class=&quot;c1&quot;&gt;#... snip ...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;p&gt;To help with these operations, the &lt;em&gt;Okapi Maven Plugin&lt;/em&gt; allows you to build and install &lt;em&gt;BCONF&lt;/em&gt; files as part of your build.&lt;/p&gt;
 
-&lt;p&gt;You can find more on ObjectRecognition and the TensorFlow in Apache Tika Server from my previous blog post &lt;a href=&quot;/technology/opensource/apache-tika-and-objectrecognitionparser-tensorflow-rest.html&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h4 id=&quot;okapiexport&quot;&gt;okapi:export&lt;/h4&gt;
 
-&lt;h2 id=&quot;want-more&quot;&gt;Want more?&lt;/h2&gt;
+&lt;p&gt;The &lt;em&gt;export&lt;/em&gt; goal builds and export a Binary Configuration file and can be configured to package up configuration items in a number of scenarios.&lt;/p&gt;
 
-&lt;p&gt;I plan to write most specific blog posts, similar to the Tensorflow REST one, on each of these example scenarios. So please subscribe to the &lt;a href=&quot;/feed.xml&quot; target=&quot;_blank&quot;&gt;RSS feed&lt;/a&gt; for this blog if you are interested.&lt;/p&gt;
+&lt;p&gt;By default, the goal only has one mandatory parameter, &lt;em&gt;bconf&lt;/em&gt;. This is the name or path to where the Binary Configuration file should be exported to.&lt;/p&gt;
 
-&lt;p&gt;If you would like to see other examples like this, either let me know directly on GitHub or Twitter, or message on the Apache Tika Users or Developer &lt;a href=&quot;https://tika.apache.org/mail-lists.html&quot; target=&quot;_blank&quot;&gt;mailing lists&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The rest of the parameters are optional, allowing you to either package a pipeline and the filter mappings and/or plugins required to successfully execute it within Longhorn, or simply bundle a set configuration assets for sharing.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Mandatory Name or Path to Export the BCONF to --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;bconf&amp;gt;&lt;/span&gt;export.bconf&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bconf&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional Pipeline to be used in the BCONF --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;pipeline&amp;gt;&lt;/span&gt;test.pln&lt;span class=&quot;nt&quot;&gt;&amp;lt;/pipeline&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional Custom Filter Mapping(s) to be embedded in the BCONF --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;filterMappings&amp;gt;&lt;/span&gt; 
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;filterMapping&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- File extension to be mapped --&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;extension&amp;gt;&lt;/span&gt;.htm&lt;span class=&quot;nt&quot;&gt;&amp;lt;/extension&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Configuration to be used --&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;okf_html@test&lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/filterMapping&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/filterMappings&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional Plugins to be included in the BCONF using Maven FileSet format- --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- See https://maven.apache.org/shared/file-management/fileset.html for more details --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- defaults to project baseDir --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;input&lt;span class=&quot;nt&quot;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional - Includes or Excludes --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;includes&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;**/*.jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/includes&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional output directory for the Okapi pipeline --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Defaults to the Maven target directory --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;outputDirectory&amp;gt;&lt;/span&gt;/tmp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/outputDirectory&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;okapiinstall&quot;&gt;okapi:install&lt;/h4&gt;
+
+&lt;p&gt;The &lt;em&gt;install&lt;/em&gt; goal installs a Binary Configuration file (a bconf) to a folder on the local machine so it can be used.&lt;/p&gt;
+
+&lt;p&gt;The configuration for this goal has two mandatory items:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;em&gt;bconf&lt;/em&gt; - the location of the BCONF file to install&lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;outputDirectory&lt;/em&gt; - the folder to install the BCONF to&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;bconf&amp;gt;&lt;/span&gt;export.bconf&lt;span class=&quot;nt&quot;&gt;&amp;lt;/bconf&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;outputDirectory&amp;gt;&lt;/span&gt;/tmp/install-test&lt;span class=&quot;nt&quot;&gt;&amp;lt;/outputDirectory&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Both paths can be absolute or relative to the Maven Project’s &lt;em&gt;baseDir&lt;/em&gt;, which can be useful when chaining with the &lt;em&gt;pipeline&lt;/em&gt; goal.&lt;/p&gt;
+
+&lt;h3 id=&quot;pipelines&quot;&gt;Pipelines&lt;/h3&gt;
+
+&lt;p&gt;At the core of the Okapi Framework is the concept of a &lt;em&gt;pipeline&lt;/em&gt; - a list of actions in sequence that can be applied to or more input documents. Each action is a &lt;em&gt;step&lt;/em&gt; in Okapi parlance, which when chained together can build very powerful and complex translation workflows.&lt;/p&gt;
+
+&lt;p&gt;Pipelines can be developed using the user interface in Okapi &lt;em&gt;Rainbow&lt;/em&gt; or via an XML format, with the framework supplying a significant library of out-of-the-box steps and pipelines for common actions in translation workflow. Like everything in Okapi, you can build your own steps.&lt;/p&gt;
+
+&lt;p&gt;To help with executing pipelines, the &lt;em&gt;Okapi Maven Plugin&lt;/em&gt; allows you to execute pre-defined pipelines as part of your build.&lt;/p&gt;
+
+&lt;h4 id=&quot;okapiexecute&quot;&gt;okapi:execute&lt;/h4&gt;
+
+&lt;p&gt;The &lt;em&gt;execute&lt;/em&gt; goal executes a pipeline contained in a pipeline configuration file (a pln file) against the supplied input file(s).&lt;/p&gt;
+
+&lt;p&gt;By default, the goal has four mandatory parameters:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;pipeline - the path to the pipeline file&lt;/li&gt;
+  &lt;li&gt;inputFiles - the input files to process, defined using a FileSet&lt;/li&gt;
+  &lt;li&gt;sourceLang - the source language name or code of the content&lt;/li&gt;
+  &lt;li&gt;targetLang - the target language  name or code of the content&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There are many other configuration options available to allow you to specify additional options for customised filter configurations, plugin locations, or override default locations. These can be useful if you are embedding your own custom assets into a build.&lt;/p&gt;
+
+&lt;div class=&quot;language-xml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Mandatory Path to pipeline to execute --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;pipeline&amp;gt;&lt;/span&gt;test.pln&lt;span class=&quot;nt&quot;&gt;&amp;lt;/pipeline&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Mandatory inputFiles using Maven FileSet format--&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- See https://maven.apache.org/shared/file-management/fileset.html for more details --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;inputFiles&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- defaults to project baseDir --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;input&lt;span class=&quot;nt&quot;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional - Includes or Excludes --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;includes&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;**/*.txt&lt;span class=&quot;nt&quot;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;**/*.md&lt;span class=&quot;nt&quot;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/includes&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;excludes&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;exclude&amp;gt;&lt;/span&gt;**/*.xml&lt;span class=&quot;nt&quot;&gt;&amp;lt;/exclude&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/excludes&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/inputFiles&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Mandatory Source Language Name or Code--&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;sourceLang&amp;gt;&lt;/span&gt;English&lt;span class=&quot;nt&quot;&gt;&amp;lt;/sourceLang&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Mandatory Target Language Name or Code--&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;targetLang&amp;gt;&lt;/span&gt;fr-FR&lt;span class=&quot;nt&quot;&gt;&amp;lt;/targetLang&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional directory containing custom plugins --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Defaults to the project directory --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;pluginsDirectory&amp;gt;&lt;/span&gt;pluginsDir&lt;span class=&quot;nt&quot;&gt;&amp;lt;/pluginsDirectory&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional Explicit Plugins using Maven FileSet format- --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- See https://maven.apache.org/shared/file-management/fileset.html for more details --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional directory - can be absolute (include Maven variables), or relative to project baseDir --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- defaults to project baseDir --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;directory&amp;gt;&lt;/span&gt;input&lt;span class=&quot;nt&quot;&gt;&amp;lt;/directory&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional - Includes or Excludes --&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;includes&amp;gt;&lt;/span&gt;
+            &lt;span class=&quot;nt&quot;&gt;&amp;lt;include&amp;gt;&lt;/span&gt;**/*.jar&lt;span class=&quot;nt&quot;&gt;&amp;lt;/include&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;/includes&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional directory containing custom filters --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Defaults to the project directory --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;filtersDirectory&amp;gt;&lt;/span&gt;filtersDir&lt;span class=&quot;nt&quot;&gt;&amp;lt;/filtersDirectory&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Optional output directory for the Okapi pipeline --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- Defaults to the Maven target directory --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;outputDirectory&amp;gt;&lt;/span&gt;/tmp&lt;span class=&quot;nt&quot;&gt;&amp;lt;/outputDirectory&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;next-steps&quot;&gt;Next Steps&lt;/h2&gt;
+
+&lt;p&gt;Whilst I moved on from Lingo24 before being able to use the plugin in anger, I have continued to use it for automating actions on some personal projects. I plan to keep evolving it as and when I get a chance, so would love feedback on what could be better or additional features that would be handy.&lt;/p&gt;
+
+&lt;p&gt;Happy translating!&lt;/p&gt;
 </description>
-        <pubDate>Mon, 28 Dec 2020 08:00:00 +0000</pubDate>
-        <link>https://meikle.io/technology/opensource/apache-tika-docker-examples.html</link>
-        <guid isPermaLink="true">https://meikle.io/technology/opensource/apache-tika-docker-examples.html</guid>
+        <pubDate>Sat, 16 Jul 2022 08:00:00 +0100</pubDate>
+        <link>https://meikle.io/localization/opensource/new-okapi-maven-plugin.html</link>
+        <guid isPermaLink="true">https://meikle.io/localization/opensource/new-okapi-maven-plugin.html</guid>
         
-        <category>apache</category>
+        <category>okapi</category>
         
-        <category>tika</category>
-        
-        <category>examples</category>
+        <category>maven-plugin</category>
         
         
-        <category>technology</category>
+        <category>localization</category>
         
         <category>opensource</category>
         

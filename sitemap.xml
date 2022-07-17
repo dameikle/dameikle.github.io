@@ -17,8 +17,8 @@
 <lastmod>2020-12-01T08:00:00+00:00</lastmod>
 </url>
 <url>
-<loc>https://meikle.io/technology/opensource/apache-tika-docker-examples.html</loc>
-<lastmod>2020-12-28T08:00:00+00:00</lastmod>
+<loc>https://meikle.io/localization/opensource/new-okapi-maven-plugin.html</loc>
+<lastmod>2022-07-16T08:00:00+01:00</lastmod>
 </url>
 <url>
 <loc>https://meikle.io/404</loc>
@@ -54,7 +54,10 @@
 <loc>https://meikle.io/tag/tensorflow/</loc>
 </url>
 <url>
-<loc>https://meikle.io/tag/examples/</loc>
+<loc>https://meikle.io/tag/okapi/</loc>
+</url>
+<url>
+<loc>https://meikle.io/tag/maven-plugin/</loc>
 </url>
 <url>
 <loc>https://meikle.io/categories/personal/</loc>
@@ -64,5 +67,8 @@
 </url>
 <url>
 <loc>https://meikle.io/categories/opensource/</loc>
+</url>
+<url>
+<loc>https://meikle.io/categories/localization/</loc>
 </url>
 </urlset>
