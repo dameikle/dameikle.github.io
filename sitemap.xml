@@ -25,6 +25,10 @@
 <lastmod>2022-07-16T08:00:00+01:00</lastmod>
 </url>
 <url>
+<loc>https://meikle.io/opensource/development-ssl-dotnetcore-docker.html</loc>
+<lastmod>2022-08-03T21:00:00+01:00</lastmod>
+</url>
+<url>
 <loc>https://meikle.io/404</loc>
 </url>
 <url>
@@ -65,6 +69,15 @@
 </url>
 <url>
 <loc>https://meikle.io/tag/maven-plugin/</loc>
+</url>
+<url>
+<loc>https://meikle.io/tag/dotnetcore/</loc>
+</url>
+<url>
+<loc>https://meikle.io/tag/nginx/</loc>
+</url>
+<url>
+<loc>https://meikle.io/tag/docker/</loc>
 </url>
 <url>
 <loc>https://meikle.io/categories/personal/</loc>
