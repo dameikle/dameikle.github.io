@@ -5,8 +5,8 @@
     <description>I love to solve problems - often with software, always with tea.</description>
     <link>https://meikle.io/</link>
     <atom:link href="https://meikle.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 Aug 2022 21:39:07 +0100</pubDate>
-    <lastBuildDate>Wed, 03 Aug 2022 21:39:07 +0100</lastBuildDate>
+    <pubDate>Wed, 03 Aug 2022 21:47:48 +0100</pubDate>
+    <lastBuildDate>Wed, 03 Aug 2022 21:47:48 +0100</lastBuildDate>
     <generator>Jekyll v4.2.1</generator>
     
       <item>
@@ -35,6 +35,9 @@ applications.&lt;/p&gt;
 
 &lt;p&gt;The beauty of this command on Window is that it adds the certificate to the trusted store locally meaning
 that browsers will validate it as such.&lt;/p&gt;
+
+&lt;p&gt;By using this approach each developer can quickly generate their own certificates locally and mount them in Docker
+as part of a &lt;em&gt;Docker Compose&lt;/em&gt; file.&lt;/p&gt;
 
 &lt;h2 id=&quot;net-core-application&quot;&gt;.NET Core Application&lt;/h2&gt;
 
